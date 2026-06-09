@@ -1,0 +1,15 @@
+services:
+  db:
+     image: postgres:16
+     restart: unless-stopped
+     environment:
+        POSTGRES_USER: wakaba
+        POSTGRES_PASSWORD: wakaba-dev
+        POSTGRES_DB: wakaba
+     ports:
+        - "5432:5432"
+     volumes:
+        - wakaba_pgdata:/var/lib/postgresql/data
+
+volumes:
+   wakaba_pgdata:
