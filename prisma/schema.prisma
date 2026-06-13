@@ -28,3 +28,218 @@ model RefreshToken {
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
+
+model Track {
+  id          String   @id
+  title       Json
+  description Json
+  position    Int      @default(0)
+  lessons     Lesson[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Lesson {
+  id        String       @id
+  trackId   String
+  track     Track        @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  title     Json
+  context   Json
+  version   Int          @default(1)
+  position  Int          @default(0)
+  changelog Json
+  steps     LessonStep[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+enum StepKind {
+  teach
+  assemble
+  speak
+  listen
+  dialog
+}
+
+model LessonStep {
+  id         String              @id
+  lessonId   String
+  lesson     Lesson              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  position   Int
+  kind       StepKind
+  sentenceId String?
+  sentence   Sentence?           @relation(fields: [sentenceId], references: [id], onDelete: SetNull)
+  dialogId   String?
+  dialog     Dialog?             @relation(fields: [dialogId], references: [id], onDelete: SetNull)
+  patternId  String?
+  pattern    Pattern?            @relation(fields: [patternId], references: [id], onDelete: SetNull)
+  siblings   LessonStepSibling[]
+}
+
+model LessonStepSibling {
+  lessonStepId String
+  lessonStep   LessonStep @relation(fields: [lessonStepId], references: [id], onDelete: Cascade)
+  sentenceId   String
+  sentence     Sentence   @relation(fields: [sentenceId], references: [id], onDelete: Cascade)
+  position     Int
+
+  @@id([lessonStepId, sentenceId])
+}
+
+model Pattern {
+  id           String               @id
+  explanation  Json
+  slotType     String
+  grammarNotes PatternGrammarNote[]
+  sentences    Sentence[]
+  lessonSteps  LessonStep[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model GrammarNote {
+  id        String               @id
+  title     Json
+  body      Json
+  deeper    Json?
+  examples  GrammarExample[]
+  patterns  PatternGrammarNote[]
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  tokens    Token[]
+}
+
+model PatternGrammarNote {
+  patternId     String
+  pattern       Pattern     @relation(fields: [patternId], references: [id], onDelete: Cascade)
+  grammarNoteId String
+  grammarNote   GrammarNote @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
+
+  @@id([patternId, grammarNoteId])
+}
+
+enum GrammarExampleKind {
+  transform
+  phrase
+  plain
+}
+
+model GrammarExample {
+  id            String             @id
+  grammarNoteId String
+  grammarNote   GrammarNote        @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
+  position      Int
+  kind          GrammarExampleKind
+  payload       Json
+}
+
+model SynonymGroup {
+  id        String          @id
+  meaning   Json
+  members   SynonymMember[]
+  tokens    Token[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+enum Register {
+  casual
+  neutral
+  polite
+  humble
+}
+
+model SynonymMember {
+  id             String       @id
+  synonymGroupId String
+  synonymGroup   SynonymGroup @relation(fields: [synonymGroupId], references: [id], onDelete: Cascade)
+  tokenId        String
+  token          Token        @relation(fields: [tokenId], references: [id], onDelete: Cascade)
+  register       Register?
+  note           Json?
+}
+
+enum TokenType {
+  noun
+  pronoun
+  verb
+  adjective
+  adverb
+  particle
+  ending
+  prefix
+  number
+  counter
+  expression
+  other
+}
+
+model Token {
+  id             String          @id
+  surface        String
+  reading        String
+  romaji         String
+  cyrillic       String
+  gloss          Json
+  type           TokenType
+  audioKey       String?
+  grammarNoteId  String?
+  grammarNote    GrammarNote?    @relation(fields: [grammarNoteId], references: [id], onDelete: SetNull)
+  synonymGroupId String?
+  synonymGroup   SynonymGroup?   @relation(fields: [synonymGroupId], references: [id], onDelete: SetNull)
+  sentenceTokens SentenceToken[]
+  synonymMembers SynonymMember[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model Sentence {
+  id            String              @id
+  patternId     String?
+  pattern       Pattern?            @relation(fields: [patternId], references: [id], onDelete: SetNull)
+  translation   Json
+  romaji        String
+  cyrillicGuide Json
+  audioKey      String
+  tokens        SentenceToken[]
+  dialogTurns   DialogTurn[]
+  lessonSteps   LessonStep[]
+  siblingOf     LessonStepSibling[]
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+}
+
+model SentenceToken {
+  id          String   @id
+  sentenceId  String
+  sentence    Sentence @relation(fields: [sentenceId], references: [id], onDelete: Cascade)
+  tokenId     String
+  token       Token    @relation(fields: [tokenId], references: [id], onDelete: Restrict)
+  position    Int
+  slotType    String?
+  isFocusSlot Boolean  @default(false)
+}
+
+model Dialog {
+  id          String       @id
+  title       Json
+  turns       DialogTurn[]
+  lessonSteps LessonStep[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+enum Speaker {
+  user
+  staff
+}
+
+model DialogTurn {
+  id         String   @id
+  dialogId   String
+  dialog     Dialog   @relation(fields: [dialogId], references: [id], onDelete: Cascade)
+  position   Int
+  speaker    Speaker
+  sentenceId String
+  sentence   Sentence @relation(fields: [sentenceId], references: [id], onDelete: Restrict)
+}
