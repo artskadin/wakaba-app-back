@@ -1,0 +1,385 @@
+{
+  "lesson": {
+    "id": "konbini_buy",
+    "trackId": "shop",
+    "title": { "ru": "Покупка в конбини" },
+    "context": { "ru": "Ты в конбини, выбрал товар." },
+    "version": 1,
+    "changelog": [
+      { "version": 1, "date": "2026-06-10", "summary": { "ru": "Создана" }, "notify": false }
+    ],
+    "steps": [
+      {
+        "kind": "teach",
+        "sentenceId": "q_kore",
+        "patternId": "price",
+        "siblingSentenceIds": ["q_kore", "q_biru", "q_obento", "q_mizu"]
+      },
+      { "kind": "teach", "sentenceId": "req" },
+      { "kind": "assemble", "sentenceId": "q_biru" },
+      { "kind": "speak", "sentenceId": "q_kore" },
+      { "kind": "dialog", "dialogId": "buy" }
+    ]
+  },
+  "tokens": {
+    "kore": {
+      "id": "kore",
+      "surface": "これ",
+      "reading": "これ",
+      "romaji": "kore",
+      "cyrillic": "корэ",
+      "gloss": { "ru": "это" },
+      "type": "pronoun"
+    },
+    "biru": {
+      "id": "biru",
+      "surface": "ビール",
+      "reading": "びーる",
+      "romaji": "bīru",
+      "cyrillic": "би:ру",
+      "gloss": { "ru": "пиво" },
+      "type": "noun"
+    },
+    "obento": {
+      "id": "obento",
+      "surface": "お弁当",
+      "reading": "おべんとう",
+      "romaji": "o-bentō",
+      "cyrillic": "о-бэнто:",
+      "gloss": { "ru": "бэнто" },
+      "type": "noun"
+    },
+    "mizu": {
+      "id": "mizu",
+      "surface": "水",
+      "reading": "みず",
+      "romaji": "mizu",
+      "cyrillic": "мидзу",
+      "gloss": { "ru": "вода" },
+      "type": "noun"
+    },
+    "wa": {
+      "id": "wa",
+      "surface": "は",
+      "reading": "は",
+      "romaji": "wa",
+      "cyrillic": "ва",
+      "gloss": { "ru": "(тема)" },
+      "type": "particle",
+      "grammarNoteId": "wa"
+    },
+    "ikura": {
+      "id": "ikura",
+      "surface": "いくら",
+      "reading": "いくら",
+      "romaji": "ikura",
+      "cyrillic": "икура",
+      "gloss": { "ru": "сколько (стоит)" },
+      "type": "noun",
+      "grammarNoteId": "ikura"
+    },
+    "desu": {
+      "id": "desu",
+      "surface": "です",
+      "reading": "です",
+      "romaji": "desu",
+      "cyrillic": "дэс",
+      "gloss": { "ru": "(вежливость)" },
+      "type": "ending",
+      "grammarNoteId": "desu"
+    },
+    "ka": {
+      "id": "ka",
+      "surface": "か",
+      "reading": "か",
+      "romaji": "ka",
+      "cyrillic": "ка",
+      "gloss": { "ru": "(вопрос)" },
+      "type": "ending",
+      "grammarNoteId": "ka"
+    },
+    "nihon": {
+      "id": "nihon",
+      "surface": "二本",
+      "reading": "にほん",
+      "romaji": "nihon",
+      "cyrillic": "нихон",
+      "gloss": { "ru": "две (бутылки/банки)" },
+      "type": "number",
+      "grammarNoteId": "hon"
+    },
+    "kudasai": {
+      "id": "kudasai",
+      "surface": "ください",
+      "reading": "ください",
+      "romaji": "kudasai",
+      "cyrillic": "кудасай",
+      "gloss": { "ru": "дайте, пожалуйста" },
+      "type": "verb",
+      "grammarNoteId": "kudasai"
+    },
+    "roppyaku": {
+      "id": "roppyaku",
+      "surface": "六百",
+      "reading": "ろっぴゃく",
+      "romaji": "roppyaku",
+      "cyrillic": "роппяку",
+      "gloss": { "ru": "шестьсот" },
+      "type": "number",
+      "grammarNoteId": "hundreds"
+    },
+    "en": {
+      "id": "en",
+      "surface": "円",
+      "reading": "えん",
+      "romaji": "en",
+      "cyrillic": "эн",
+      "gloss": { "ru": "иена" },
+      "type": "counter"
+    },
+    "fukuro": {
+      "id": "fukuro",
+      "surface": "袋",
+      "reading": "ふくろ",
+      "romaji": "fukuro",
+      "cyrillic": "фукуро",
+      "gloss": { "ru": "пакет" },
+      "type": "noun"
+    },
+    "irimasu": {
+      "id": "irimasu",
+      "surface": "いります",
+      "reading": "いります",
+      "romaji": "irimasu",
+      "cyrillic": "иримас",
+      "gloss": { "ru": "нужен / требуется" },
+      "type": "verb",
+      "grammarNoteId": "irimasu"
+    },
+    "hai": {
+      "id": "hai",
+      "surface": "はい",
+      "reading": "はい",
+      "romaji": "hai",
+      "cyrillic": "хай",
+      "gloss": { "ru": "да" },
+      "type": "expression"
+    },
+    "onegai": {
+      "id": "onegai",
+      "surface": "お願いします",
+      "reading": "おねがいします",
+      "romaji": "onegai shimasu",
+      "cyrillic": "онэгай симас",
+      "gloss": { "ru": "прошу / пожалуйста" },
+      "type": "expression",
+      "grammarNoteId": "onegai"
+    }
+  },
+  "grammarNotes": {
+    "wa": {
+      "id": "wa",
+      "title": { "ru": "は — частица темы (читается «ва»!)" },
+      "body": {
+        "ru": "Помечает тему фразы. Пишется знаком は (ха), но как частица читается «ва» — как и を."
+      },
+      "examples": [
+        {
+          "kind": "phrase",
+          "forms": [{ "surface": "これは", "romaji": "kore wa" }],
+          "note": { "ru": "что касается этого" }
+        }
+      ]
+    },
+    "ikura": {
+      "id": "ikura",
+      "title": { "ru": "いくら — «сколько (стоит)»" },
+      "body": { "ru": "Спрашивает цену, ставится перед です." },
+      "examples": [
+        {
+          "kind": "phrase",
+          "forms": [{ "surface": "いくらですか", "romaji": "ikura desu ka" }],
+          "note": { "ru": "сколько стоит?" }
+        }
+      ]
+    },
+    "desu": {
+      "id": "desu",
+      "title": { "ru": "です — вежливая связка" },
+      "body": {
+        "ru": "Завершает фразу вежливо, на русский отдельно не переводится. Читается «дэс»."
+      },
+      "examples": []
+    },
+    "ka": {
+      "id": "ka",
+      "title": { "ru": "か — вопросительная частица" },
+      "body": { "ru": "В конце фразы превращает утверждение в вопрос." },
+      "examples": [
+        {
+          "kind": "transform",
+          "from": { "surface": "です", "romaji": "desu" },
+          "to": { "surface": "ですか", "romaji": "desu ka" }
+        }
+      ]
+    },
+    "hon": {
+      "id": "hon",
+      "title": { "ru": "本 — счётчик бутылок/банок" },
+      "body": {
+        "ru": "Считает бутылки, банки, длинные предметы. Звук меняется: 一本 ippon, 二本 nihon, 三本 sanbon."
+      },
+      "examples": [
+        {
+          "kind": "phrase",
+          "forms": [{ "surface": "二本ください", "romaji": "nihon kudasai" }],
+          "note": { "ru": "дайте две" }
+        }
+      ]
+    },
+    "hundreds": {
+      "id": "hundreds",
+      "title": { "ru": "六百 — 600 (роппяку)" },
+      "body": { "ru": "Сотни меняют звук: 300 sanbyaku, 600 roppyaku, 800 happyaku." },
+      "examples": []
+    },
+    "kudasai": {
+      "id": "kudasai",
+      "title": { "ru": "ください — «дайте, пожалуйста»" },
+      "body": { "ru": "Вежливая просьба дать предмет." },
+      "examples": []
+    },
+    "irimasu": {
+      "id": "irimasu",
+      "title": { "ru": "いります — «нужен / требуется»" },
+      "body": { "ru": "Вежливая форма 要る (iru). 袋はいりますか = «пакет нужен?»." },
+      "examples": []
+    },
+    "onegai": {
+      "id": "onegai",
+      "title": { "ru": "お願いします — «прошу / пожалуйста»" },
+      "body": { "ru": "Универсальная вежливая просьба. Здесь = «да, давайте»." },
+      "examples": []
+    }
+  },
+  "patterns": {
+    "price": {
+      "id": "price",
+      "explanation": { "ru": "[товар] + は + いくら + ですか. Меняешь только товар." },
+      "slotType": "item",
+      "grammarNoteIds": ["wa", "ikura", "desu", "ka"]
+    }
+  },
+  "sentences": {
+    "q_kore": {
+      "id": "q_kore",
+      "tokens": [
+        { "tokenId": "kore", "slotType": "item", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "ikura" },
+        { "tokenId": "desu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Сколько это стоит?" },
+      "romaji": "Kore wa ikura desu ka?",
+      "cyrillicGuide": { "ru": "корэ ва икура дэс ка" },
+      "audioKey": "s_q_kore.mp3",
+      "patternId": "price"
+    },
+    "q_biru": {
+      "id": "q_biru",
+      "tokens": [
+        { "tokenId": "biru", "slotType": "item", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "ikura" },
+        { "tokenId": "desu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Сколько стоит пиво?" },
+      "romaji": "Bīru wa ikura desu ka?",
+      "cyrillicGuide": { "ru": "би:ру ва икура дэс ка" },
+      "audioKey": "s_q_biru.mp3",
+      "patternId": "price"
+    },
+    "q_obento": {
+      "id": "q_obento",
+      "tokens": [
+        { "tokenId": "obento", "slotType": "item", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "ikura" },
+        { "tokenId": "desu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Сколько стоит бэнто?" },
+      "romaji": "O-bentō wa ikura desu ka?",
+      "cyrillicGuide": { "ru": "о-бэнто: ва икура дэс ка" },
+      "audioKey": "s_q_obento.mp3",
+      "patternId": "price"
+    },
+    "q_mizu": {
+      "id": "q_mizu",
+      "tokens": [
+        { "tokenId": "mizu", "slotType": "item", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "ikura" },
+        { "tokenId": "desu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Сколько стоит вода?" },
+      "romaji": "Mizu wa ikura desu ka?",
+      "cyrillicGuide": { "ru": "мидзу ва икура дэс ка" },
+      "audioKey": "s_q_mizu.mp3",
+      "patternId": "price"
+    },
+    "req": {
+      "id": "req",
+      "tokens": [{ "tokenId": "nihon" }, { "tokenId": "kudasai" }],
+      "translation": { "ru": "Дайте две, пожалуйста" },
+      "romaji": "Nihon kudasai",
+      "cyrillicGuide": { "ru": "нихон кудасай" },
+      "audioKey": "s_req.mp3"
+    },
+    "d_price": {
+      "id": "d_price",
+      "tokens": [{ "tokenId": "roppyaku" }, { "tokenId": "en" }, { "tokenId": "desu" }],
+      "translation": { "ru": "600 иен" },
+      "romaji": "Roppyaku en desu",
+      "cyrillicGuide": { "ru": "роппяку эн дэс" },
+      "audioKey": "s_d_price.mp3"
+    },
+    "d_bag": {
+      "id": "d_bag",
+      "tokens": [
+        { "tokenId": "fukuro" },
+        { "tokenId": "wa" },
+        { "tokenId": "irimasu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Нужен пакет?" },
+      "romaji": "Fukuro wa irimasu ka?",
+      "cyrillicGuide": { "ru": "фукуро ва иримас ка" },
+      "audioKey": "s_d_bag.mp3"
+    },
+    "d_yes": {
+      "id": "d_yes",
+      "tokens": [{ "tokenId": "hai" }, { "tokenId": "onegai" }],
+      "translation": { "ru": "Да, пожалуйста" },
+      "romaji": "Hai, onegai shimasu",
+      "cyrillicGuide": { "ru": "хай, онэгай симас" },
+      "audioKey": "s_d_yes.mp3"
+    }
+  },
+  "dialogs": {
+    "buy": {
+      "id": "buy",
+      "title": { "ru": "Покупка пива" },
+      "turns": [
+        { "speaker": "user", "sentenceId": "q_biru" },
+        { "speaker": "staff", "sentenceId": "d_price" },
+        { "speaker": "user", "sentenceId": "req" },
+        { "speaker": "staff", "sentenceId": "d_bag" },
+        { "speaker": "user", "sentenceId": "d_yes" }
+      ]
+    }
+  }
+}

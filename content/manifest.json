@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": "shop",
+      "title": { "ru": "В магазине" },
+      "description": { "ru": "Спросить цену, купить, понять кассира." },
+      "lessons": [{ "id": "konbini_buy", "title": { "ru": "Покупка в конбини" } }]
+    }
+  ]
+}
