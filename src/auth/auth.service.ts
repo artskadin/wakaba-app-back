@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { empty } from '@prisma/client/runtime/library';
 import argon2 from 'argon2';
 import { randomUUID } from 'crypto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -80,7 +81,10 @@ export class AuthService {
 
     const tokens = await this.issueTokens(user.id, user.email);
 
-    return { user: { id: user.id, email: user.email }, ...tokens };
+    return {
+      user: { id: user.id, email: user.email, createdAt: user.createdAt },
+      ...tokens,
+    };
   }
 
   async logout(token: string) {
@@ -120,5 +124,15 @@ export class AuthService {
     });
 
     return { accessToken, refreshToken };
+  }
+
+  async getProfile(userId: string) {
+    const user = await this.users.findById(userId);
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    return { id: user.id, email: user.email, createdAt: user.createdAt };
   }
 }
