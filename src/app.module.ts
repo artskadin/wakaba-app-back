@@ -6,6 +6,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ContentModule } from './content/content.module';
+import { ProgressModule } from './progress/progress.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ContentModule } from './content/content.module';
     UsersModule,
     AuthModule,
     ContentModule,
+    ProgressModule,
   ],
   controllers: [AppController],
   providers: [AppService],

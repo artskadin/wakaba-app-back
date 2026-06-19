@@ -13,11 +13,12 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  email         String         @unique
-  passwordHash  String
-  createdAt     DateTime       @default(now())
-  refreshTokens RefreshToken[]
+  id             String           @id @default(uuid())
+  email          String           @unique
+  passwordHash   String
+  refreshTokens  RefreshToken[]
+  lessonProgress LessonProgress[]
+  createdAt      DateTime         @default(now())
 }
 
 model RefreshToken {
@@ -40,17 +41,18 @@ model Track {
 }
 
 model Lesson {
-  id        String       @id
+  id        String           @id
   trackId   String
-  track     Track        @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  track     Track            @relation(fields: [trackId], references: [id], onDelete: Cascade)
   title     Json
   context   Json
-  version   Int          @default(1)
-  position  Int          @default(0)
+  version   Int              @default(1)
+  position  Int              @default(0)
   changelog Json
   steps     LessonStep[]
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  progress  LessonProgress[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
 }
 
 enum StepKind {
@@ -242,4 +244,27 @@ model DialogTurn {
   speaker    Speaker
   sentenceId String
   sentence   Sentence @relation(fields: [sentenceId], references: [id], onDelete: Restrict)
+}
+
+enum LessonStatus {
+  available
+  in_progress
+  completed
+}
+
+model LessonProgress {
+  id                 String       @id @default(uuid())
+  userId             String
+  user               User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId           String
+  lesson             Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  status             LessonStatus
+  currentStep        Int          @default(0)
+  completedAt        DateTime?
+  completedAtVersion Int?
+  hintsUsed          Int          @default(0)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@unique([userId, lessonId])
 }
