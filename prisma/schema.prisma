@@ -18,6 +18,7 @@ model User {
   passwordHash   String
   refreshTokens  RefreshToken[]
   lessonProgress LessonProgress[]
+  favourites     Favourite[]
   createdAt      DateTime         @default(now())
 }
 
@@ -191,6 +192,7 @@ model Token {
   synonymGroup   SynonymGroup?   @relation(fields: [synonymGroupId], references: [id], onDelete: SetNull)
   sentenceTokens SentenceToken[]
   synonymMembers SynonymMember[]
+  favourites     Favourite[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 }
@@ -207,6 +209,7 @@ model Sentence {
   dialogTurns   DialogTurn[]
   lessonSteps   LessonStep[]
   siblingOf     LessonStepSibling[]
+  favourites    Favourite[]
   createdAt     DateTime            @default(now())
   updatedAt     DateTime            @updatedAt
 }
@@ -267,4 +270,24 @@ model LessonProgress {
   updatedAt          DateTime     @updatedAt
 
   @@unique([userId, lessonId])
+}
+
+enum FavouriteItemType {
+  token
+  sentence
+}
+
+model Favourite {
+  id         String            @id @default(uuid())
+  userId     String
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemType   FavouriteItemType
+  tokenId    String?
+  token      Token?            @relation(fields: [tokenId], references: [id], onDelete: Cascade)
+  sentenceId String?
+  sentence   Sentence?         @relation(fields: [sentenceId], references: [id], onDelete: Cascade)
+  createdAt  DateTime          @default(now())
+
+  @@unique([userId, tokenId])
+  @@unique([userId, sentenceId])
 }

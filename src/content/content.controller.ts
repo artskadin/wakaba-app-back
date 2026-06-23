@@ -16,4 +16,9 @@ export class ContentController {
   getLesson(@Param('id') id: string) {
     return this.content.getLessonBundle(id);
   }
+
+  @Get('tokens/:id')
+  getToken(@Param('id') id: string) {
+    return this.content.getTokenDetail(id);
+  }
 }

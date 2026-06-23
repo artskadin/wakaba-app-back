@@ -57,6 +57,25 @@ export class ContentService {
     };
   }
 
+  async getTokenDetail(id: string) {
+    const token = await this.prisma.token.findUnique({
+      where: { id },
+      include: {
+        grammarNote: {
+          include: { examples: { orderBy: { position: 'asc' } } },
+        },
+      },
+    });
+
+    if (!token) {
+      throw new NotFoundException(`Token ${id} not found`);
+    }
+    return {
+      token: toBundleToken(token),
+      grammarNote: token.grammarNote ? toBundleNote(token.grammarNote) : null,
+    };
+  }
+
   private async loadLessonOrThrow(id: string) {
     const lesson = await this.prisma.lesson.findUnique({
       where: { id },

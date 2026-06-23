@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ContentModule } from './content/content.module';
 import { ProgressModule } from './progress/progress.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProgressModule } from './progress/progress.module';
     AuthModule,
     ContentModule,
     ProgressModule,
+    FavouritesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
