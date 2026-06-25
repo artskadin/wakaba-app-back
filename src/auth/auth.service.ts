@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { empty } from '@prisma/client/runtime/library';
 import argon2 from 'argon2';
 import { randomUUID } from 'crypto';
 import { PrismaService } from 'src/prisma/prisma.service';

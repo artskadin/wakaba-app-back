@@ -19,7 +19,20 @@ model User {
   refreshTokens  RefreshToken[]
   lessonProgress LessonProgress[]
   favourites     Favourite[]
+  settings       UserSettings?
   createdAt      DateTime         @default(now())
+}
+
+enum Voice {
+  m
+  f
+}
+
+model UserSettings {
+  userId    String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  voice     Voice    @default(m)
+  updatedAt DateTime @updatedAt
 }
 
 model RefreshToken {

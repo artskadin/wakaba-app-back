@@ -1,4 +1,3 @@
-import { skip } from '@prisma/client/runtime/library';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { stdin, stdout } from 'node:process';
@@ -55,7 +54,7 @@ interface Item {
   translation: string;
 }
 
-const missingVoices = (type: string, id: stirng): string[] =>
+const missingVoices = (type: string, id: string): string[] =>
   VOICES.filter((v) => !existsSync(join(AUDIO_DIR, type, `${id}.${v}.mp3`)));
 
 function collectItems(): Item[] {
