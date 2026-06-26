@@ -1,122 +1,62 @@
-import {
-  GrammarExampleKind,
-  Prisma,
-  PrismaClient,
-  Speaker,
-  StepKind,
-  TokenType,
-} from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { LessonBundle, Manifest } from './types';
 
 const prisma = new PrismaClient();
 const CONTENT_DIR = join(process.cwd(), 'content');
 const toJson = (value: unknown): Prisma.InputJsonValue =>
   value as Prisma.InputJsonValue;
 
-interface Localized {
-  ru: string;
-  en?: string;
+async function main() {
+  await resetContent();
+
+  const manifest = readJson<Manifest>('manifest.json');
+
+  await seedTracks(manifest);
+
+  for (const track of manifest.tracks) {
+    for (const lessonStub of track.lessons) {
+      await seedLesson(readJson<LessonBundle>(`lessons/${lessonStub.id}.json`));
+      console.log(`✓ ${lessonStub.id}`);
+    }
+  }
 }
 
-interface ManifestTrack {
-  id: string;
-  title: Localized;
-  description: Localized;
-  lessons: { id: string; title: Localized }[];
-}
+main()
+  .then(() => prisma.$disconnect())
+  .catch(async (err) => {
+    console.error(err);
 
-interface Manifest {
-  version: number;
-  tracks: ManifestTrack[];
-}
+    await prisma.$disconnect();
 
-interface TokenRef {
-  tokenId: string;
-  slotType?: string;
-  isFocusSlot?: boolean;
-}
-
-interface BundleToken {
-  id: string;
-  surface: string;
-  reading: string;
-  romaji: string;
-  cyrillic: string;
-  gloss: Localized;
-  type: TokenType;
-  audioKey?: string;
-  grammarNoteId?: string;
-  synonymGroupId?: string;
-}
-
-interface BundleSentence {
-  id: string;
-  tokens: TokenRef[];
-  translation: Localized;
-  romaji: string;
-  cyrillicGuide: Localized;
-  audioKey: string;
-  patternId?: string;
-}
-
-interface BundlePattern {
-  id: string;
-  explanation: Localized;
-  slotType: string;
-  grammarNoteIds: string[];
-}
-
-interface BundleExample {
-  kind: GrammarExampleKind;
-  [key: string]: unknown;
-}
-
-interface BundleGrammarNote {
-  id: string;
-  title: Localized;
-  body: Localized;
-  deeper?: Localized;
-  examples: BundleExample[];
-}
-
-interface BundleDialog {
-  id: string;
-  title: Localized;
-  turns: { speaker: Speaker; sentenceId: string }[];
-}
-
-interface BundleStep {
-  kind: StepKind;
-  sentenceId?: string;
-  patternId?: string;
-  siblingSentenceIds?: string[];
-  dialogId?: string;
-}
-
-interface BundleLesson {
-  id: string;
-  trackId: string;
-  title: Localized;
-  context: Localized;
-  version: number;
-  changelog: unknown[];
-  steps: BundleStep[];
-}
-
-interface LessonBundle {
-  lesson: BundleLesson;
-  tokens: Record<string, BundleToken>;
-  grammarNotes: Record<string, BundleGrammarNote>;
-  patterns: Record<string, BundlePattern>;
-  sentences: Record<string, BundleSentence>;
-  dialogs: Record<string, BundleDialog>;
-}
+    process.exit(1);
+  });
 
 function readJson<T>(relativePath: string): T {
   return JSON.parse(
     readFileSync(join(CONTENT_DIR, relativePath), 'utf-8'),
   ) as T;
+}
+
+async function resetContent() {
+  await prisma.$transaction([
+    prisma.lessonStepSibling.deleteMany(),
+    prisma.lessonStep.deleteMany(),
+    prisma.dialogTurn.deleteMany(),
+    prisma.dialog.deleteMany(),
+    prisma.sentenceToken.deleteMany(),
+    prisma.sentenceGrammarNote.deleteMany(),
+    prisma.sentence.deleteMany(),
+    prisma.patternGrammarNote.deleteMany(),
+    prisma.pattern.deleteMany(),
+    prisma.synonymMember.deleteMany(),
+    prisma.synonymGroup.deleteMany(),
+    prisma.token.deleteMany(),
+    prisma.grammarNote.deleteMany(),
+    prisma.lesson.deleteMany(),
+    prisma.track.deleteMany(),
+  ]);
 }
 
 async function seedTracks(manifest: Manifest) {
@@ -149,20 +89,6 @@ async function seedLesson(bundle: LessonBundle) {
         create: { id: note.id, ...data },
         update: data,
       });
-
-      await tx.grammarExample.deleteMany({ where: { grammarNoteId: note.id } });
-
-      if (note.examples.length) {
-        await tx.grammarExample.createMany({
-          data: note.examples.map((example, idx) => ({
-            id: `${note.id}__ex${idx}`,
-            grammarNoteId: note.id,
-            position: idx,
-            kind: example.kind,
-            payload: toJson(example),
-          })),
-        });
-      }
     }
 
     for (const pattern of Object.values(bundle.patterns)) {
@@ -199,7 +125,6 @@ async function seedLesson(bundle: LessonBundle) {
         cyrillic: token.cyrillic,
         gloss: toJson(token.gloss),
         type: token.type,
-        audioKey: token.audioKey ?? null,
         grammarNoteId: token.grammarNoteId ?? null,
         synonymGroupId: token.synonymGroupId ?? null,
       };
@@ -217,7 +142,6 @@ async function seedLesson(bundle: LessonBundle) {
         translation: toJson(sentence.translation),
         romaji: sentence.romaji,
         cyrillicGuide: toJson(sentence.cyrillicGuide),
-        audioKey: sentence.audioKey,
       };
 
       await tx.sentence.upsert({
@@ -238,6 +162,19 @@ async function seedLesson(bundle: LessonBundle) {
           isFocusSlot: ref.isFocusSlot ?? false,
         })),
       });
+
+      await tx.sentenceGrammarNote.deleteMany({
+        where: { sentenceId: sentence.id },
+      });
+      if (sentence.grammarNoteIds?.length) {
+        await tx.sentenceGrammarNote.createMany({
+          data: sentence.grammarNoteIds.map((grammarNoteId, idx) => ({
+            sentenceId: sentence.id,
+            grammarNoteId,
+            position: idx,
+          })),
+        });
+      }
     }
 
     for (const dialog of Object.values(bundle.dialogs)) {
@@ -304,26 +241,3 @@ async function seedLesson(bundle: LessonBundle) {
     }
   });
 }
-
-async function main() {
-  const manifest = readJson<Manifest>('manifest.json');
-
-  await seedTracks(manifest);
-
-  for (const track of manifest.tracks) {
-    for (const lessonStub of track.lessons) {
-      await seedLesson(readJson<LessonBundle>(`lessons/${lessonStub.id}.json`));
-      console.log(`✓ ${lessonStub.id}`);
-    }
-  }
-}
-
-main()
-  .then(() => prisma.$disconnect())
-  .catch(async (err) => {
-    console.error(err);
-
-    await prisma.$disconnect();
-
-    process.exit(1);
-  });

@@ -114,15 +114,25 @@ model Pattern {
 }
 
 model GrammarNote {
-  id        String               @id
-  title     Json
-  body      Json
-  deeper    Json?
-  examples  GrammarExample[]
-  patterns  PatternGrammarNote[]
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
-  tokens    Token[]
+  id                   String                @id
+  title                Json
+  body                 Json
+  deeper               Json?
+  patterns             PatternGrammarNote[]
+  tokens               Token[]
+  sentenceGrammarNotes SentenceGrammarNote[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+}
+
+model SentenceGrammarNote {
+  sentenceId    String
+  sentence      Sentence    @relation(fields: [sentenceId], references: [id], onDelete: Cascade)
+  grammarNoteId String
+  grammarNote   GrammarNote @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
+  position      Int         @default(0)
+
+  @@id([sentenceId, grammarNoteId])
 }
 
 model PatternGrammarNote {
@@ -132,21 +142,6 @@ model PatternGrammarNote {
   grammarNote   GrammarNote @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
 
   @@id([patternId, grammarNoteId])
-}
-
-enum GrammarExampleKind {
-  transform
-  phrase
-  plain
-}
-
-model GrammarExample {
-  id            String             @id
-  grammarNoteId String
-  grammarNote   GrammarNote        @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
-  position      Int
-  kind          GrammarExampleKind
-  payload       Json
 }
 
 model SynonymGroup {
@@ -198,7 +193,6 @@ model Token {
   cyrillic       String
   gloss          Json
   type           TokenType
-  audioKey       String?
   grammarNoteId  String?
   grammarNote    GrammarNote?    @relation(fields: [grammarNoteId], references: [id], onDelete: SetNull)
   synonymGroupId String?
@@ -211,20 +205,20 @@ model Token {
 }
 
 model Sentence {
-  id            String              @id
+  id            String                @id
   patternId     String?
-  pattern       Pattern?            @relation(fields: [patternId], references: [id], onDelete: SetNull)
+  pattern       Pattern?              @relation(fields: [patternId], references: [id], onDelete: SetNull)
   translation   Json
   romaji        String
   cyrillicGuide Json
-  audioKey      String
   tokens        SentenceToken[]
   dialogTurns   DialogTurn[]
   lessonSteps   LessonStep[]
   siblingOf     LessonStepSibling[]
   favourites    Favourite[]
-  createdAt     DateTime            @default(now())
-  updatedAt     DateTime            @updatedAt
+  grammarNotes  SentenceGrammarNote[]
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
 }
 
 model SentenceToken {

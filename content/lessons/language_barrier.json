@@ -1,0 +1,526 @@
+{
+  "lesson": {
+    "id": "language_barrier",
+    "trackId": "communication",
+    "title": { "ru": "Языковой барьер" },
+    "context": { "ru": "Ты подходишь к сотруднику и хочешь понять, говорит ли он на твоём языке." },
+    "version": 1,
+    "changelog": [
+      { "version": 1, "date": "2026-06-25", "summary": { "ru": "Создана" }, "notify": false }
+    ],
+    "steps": [
+      { "kind": "teach", "sentenceId": "greet" },
+      {
+        "kind": "teach",
+        "sentenceId": "q_eigo",
+        "patternId": "speak_lang",
+        "siblingSentenceIds": ["q_eigo", "q_roshiago", "q_chuugokugo", "q_furansugo"]
+      },
+      { "kind": "teach", "sentenceId": "cant_jp" },
+      { "kind": "teach", "sentenceId": "little_jp" },
+      { "kind": "assemble", "sentenceId": "q_eigo" },
+      { "kind": "assemble", "sentenceId": "cant_jp" },
+      { "kind": "assemble", "sentenceId": "little_jp" },
+      { "kind": "dialog", "dialogId": "language_help" }
+    ]
+  },
+  "tokens": {
+    "konnichiwa": {
+      "id": "konnichiwa",
+      "surface": "こんにちは",
+      "reading": "こんにちは",
+      "romaji": "konnichiwa",
+      "cyrillic": "конничива",
+      "gloss": { "ru": "здравствуйте" },
+      "type": "expression"
+    },
+    "eigo": {
+      "id": "eigo",
+      "surface": "英語",
+      "reading": "えいご",
+      "romaji": "eigo",
+      "cyrillic": "эйго",
+      "gloss": { "ru": "английский" },
+      "type": "noun",
+      "grammarNoteId": "go"
+    },
+    "roshiago": {
+      "id": "roshiago",
+      "surface": "ロシア語",
+      "reading": "ろしあご",
+      "romaji": "roshiago",
+      "cyrillic": "росиаго",
+      "gloss": { "ru": "русский" },
+      "type": "noun",
+      "grammarNoteId": "go"
+    },
+    "chuugokugo": {
+      "id": "chuugokugo",
+      "surface": "中国語",
+      "reading": "ちゅうごくご",
+      "romaji": "chūgokugo",
+      "cyrillic": "тю:гокуго",
+      "gloss": { "ru": "китайский" },
+      "type": "noun",
+      "grammarNoteId": "go"
+    },
+    "furansugo": {
+      "id": "furansugo",
+      "surface": "フランス語",
+      "reading": "ふらんすご",
+      "romaji": "furansugo",
+      "cyrillic": "фурансуго",
+      "gloss": { "ru": "французский" },
+      "type": "noun",
+      "grammarNoteId": "go"
+    },
+    "nihongo": {
+      "id": "nihongo",
+      "surface": "日本語",
+      "reading": "にほんご",
+      "romaji": "nihongo",
+      "cyrillic": "нихонго",
+      "gloss": { "ru": "японский" },
+      "type": "noun",
+      "grammarNoteId": "go"
+    },
+    "wa": {
+      "id": "wa",
+      "surface": "は",
+      "reading": "は",
+      "romaji": "wa",
+      "cyrillic": "ва",
+      "gloss": { "ru": "(тема)" },
+      "type": "particle",
+      "grammarNoteId": "wa"
+    },
+    "hanasemasu": {
+      "id": "hanasemasu",
+      "surface": "話せます",
+      "reading": "はなせます",
+      "romaji": "hanasemasu",
+      "cyrillic": "ханасэмас",
+      "gloss": { "ru": "могу говорить" },
+      "type": "verb",
+      "grammarNoteId": "potential"
+    },
+    "hanasemasen": {
+      "id": "hanasemasen",
+      "surface": "話せません",
+      "reading": "はなせません",
+      "romaji": "hanasemasen",
+      "cyrillic": "ханасэмасэн",
+      "gloss": { "ru": "не могу говорить" },
+      "type": "verb",
+      "grammarNoteId": "potential"
+    },
+    "ka": {
+      "id": "ka",
+      "surface": "か",
+      "reading": "か",
+      "romaji": "ka",
+      "cyrillic": "ка",
+      "gloss": { "ru": "(вопрос)" },
+      "type": "ending",
+      "grammarNoteId": "ka"
+    },
+    "sukoshi": {
+      "id": "sukoshi",
+      "surface": "少し",
+      "reading": "すこし",
+      "romaji": "sukoshi",
+      "cyrillic": "сукоси",
+      "gloss": { "ru": "немного" },
+      "type": "adverb"
+    },
+    "dake": {
+      "id": "dake",
+      "surface": "だけ",
+      "reading": "だけ",
+      "romaji": "dake",
+      "cyrillic": "дакэ",
+      "gloss": { "ru": "только" },
+      "type": "particle",
+      "grammarNoteId": "dake"
+    },
+    "irasshaimase": {
+      "id": "irasshaimase",
+      "surface": "いらっしゃいませ",
+      "reading": "いらっしゃいませ",
+      "romaji": "irasshaimase",
+      "cyrillic": "ирассяимасэ",
+      "gloss": { "ru": "добро пожаловать (от персонала)" },
+      "type": "expression"
+    },
+    "hai": {
+      "id": "hai",
+      "surface": "はい",
+      "reading": "はい",
+      "romaji": "hai",
+      "cyrillic": "хай",
+      "gloss": { "ru": "да" },
+      "type": "expression"
+    }
+  },
+  "grammarNotes": {
+    "wa": {
+      "id": "wa",
+      "title": { "ru": "wa (は) — частица темы" },
+      "body": [
+        {
+          "summary": {
+            "ru": "Помечает тему — то, О ЧЁМ фраза. Схема: [тема] wa […]. Читается как «что касается …»."
+          },
+          "details": [
+            { "ru": "Пишется знаком は («ха»), но как частица читается «wa / ва»." },
+            {
+              "ru": "Ставится сразу после того, что делаешь темой: eigo wa… (эйго ва) — «насчёт английского…»."
+            }
+          ],
+          "examples": [
+            {
+              "kind": "phrase",
+              "forms": [{ "surface": "これは", "romaji": "kore wa", "cyrillic": "корэ ва" }],
+              "note": { "ru": "что касается этого" }
+            },
+            {
+              "kind": "phrase",
+              "forms": [
+                {
+                  "surface": "英語は話せますか",
+                  "romaji": "eigo wa hanasemasu ka",
+                  "cyrillic": "эйго ва ханасэмас ка"
+                }
+              ],
+              "note": { "ru": "вы говорите по-английски?" }
+            }
+          ]
+        }
+      ],
+      "deeper": [
+        {
+          "summary": {
+            "ru": "С глаголами возможности тему-объект часто маркируют не wa, а ga. ga — нейтральнее, wa — «именно про это / как тему». Оба верны."
+          },
+          "examples": [
+            {
+              "kind": "phrase",
+              "forms": [
+                {
+                  "surface": "英語が話せますか",
+                  "romaji": "eigo ga hanasemasu ka",
+                  "cyrillic": "эйго га ханасэмас ка"
+                }
+              ],
+              "note": { "ru": "вы говорите по-английски? (нейтрально)" }
+            }
+          ]
+        }
+      ]
+    },
+    "potential": {
+      "id": "potential",
+      "title": { "ru": "hanasemasu / hanasemasen — «могу / не могу»" },
+      "body": [
+        {
+          "summary": {
+            "ru": "hanasemasu — «могу говорить», hanasemasen — «не могу». Это потенциальная форма глагола hanasu (говорить)."
+          },
+          "details": [
+            {
+              "ru": "hanasu (говорить) → hanaseru → вежливо hanasemasu (ханасэмас, «могу говорить»)."
+            },
+            { "ru": "Отрицание: hanasemasu → hanasemasen (ханасэмасэн, «не могу говорить»)." },
+            { "ru": "Не путать с hanashimasu (ханасимас) — это просто «говорю», без «могу»." }
+          ],
+          "examples": [
+            {
+              "kind": "transform",
+              "from": { "surface": "話せます", "romaji": "hanasemasu", "cyrillic": "ханасэмас" },
+              "to": { "surface": "話せません", "romaji": "hanasemasen", "cyrillic": "ханасэмасэн" },
+              "note": { "ru": "могу → не могу" }
+            }
+          ]
+        }
+      ],
+      "deeper": [
+        {
+          "summary": { "ru": "Общее правило: как из любого глагола сделать «могу»." },
+          "details": [
+            { "ru": "Глаголы на -u: последний -u → -e + ru: hanasu → hanaseru, nomu → nomeru." },
+            { "ru": "Глаголы на -ru: -ru → -rareru: taberu → taberareru («могу есть»)." }
+          ],
+          "examples": [
+            {
+              "kind": "transform",
+              "from": { "surface": "飲む", "romaji": "nomu", "cyrillic": "ному" },
+              "to": { "surface": "飲める", "romaji": "nomeru", "cyrillic": "номэру" },
+              "note": { "ru": "пить → могу пить" }
+            },
+            {
+              "kind": "transform",
+              "from": { "surface": "食べる", "romaji": "taberu", "cyrillic": "табэру" },
+              "to": { "surface": "食べられる", "romaji": "taberareru", "cyrillic": "табэрарэру" },
+              "note": { "ru": "есть → могу есть" }
+            }
+          ]
+        }
+      ]
+    },
+    "ka": {
+      "id": "ka",
+      "title": { "ru": "ka (か) — вопрос" },
+      "body": [
+        {
+          "summary": { "ru": "В вежливой речи ka в конце делает фразу вопросом." },
+          "details": [
+            { "ru": "hanasemasu → hanasemasu ka (ханасэмас ка) — «можешь говорить?»." },
+            {
+              "ru": "С вопросительным словом тоже: ikura desu ka (икура дэс ка) — «сколько стоит?»."
+            },
+            { "ru": "Правило: вежливо (desu/masu) + вопрос → добавляй ka." }
+          ],
+          "examples": [
+            {
+              "kind": "transform",
+              "from": { "surface": "話せます", "romaji": "hanasemasu", "cyrillic": "ханасэмас" },
+              "to": {
+                "surface": "話せますか",
+                "romaji": "hanasemasu ka",
+                "cyrillic": "ханасэмас ка"
+              },
+              "note": { "ru": "утверждение → вопрос" }
+            }
+          ]
+        }
+      ],
+      "deeper": [
+        {
+          "summary": { "ru": "В разговорной речи ka часто опускают и поднимают интонацию." },
+          "details": [
+            { "ru": "Простая форма + интонация: hanaseru? (ханасэру)." },
+            { "ru": "ka к простой форме (hanaseru ka) звучит резко, как допрос." }
+          ]
+        }
+      ]
+    },
+    "go": {
+      "id": "go",
+      "title": { "ru": "-go (語) — суффикс «язык»" },
+      "body": [
+        {
+          "summary": {
+            "ru": "Названия языков = страна/народ + go (го). Узнал суффикс — узнаёшь все языки."
+          },
+          "details": [
+            { "ru": "eigo (эйго) — английский, nihongo (нихонго) — японский." },
+            { "ru": "roshiago (росиаго) — русский: Roshia (Россия) + go." },
+            { "ru": "chūgokugo (тю:гокуго) — китайский, furansugo (фурансуго) — французский." }
+          ],
+          "examples": [
+            {
+              "kind": "phrase",
+              "forms": [
+                { "surface": "ロシア + 語", "romaji": "roshia + go", "cyrillic": "росиа + го" }
+              ],
+              "note": { "ru": "Россия + «язык» = русский" }
+            }
+          ]
+        }
+      ]
+    },
+    "dake": {
+      "id": "dake",
+      "title": { "ru": "dake (だけ) — «только»" },
+      "body": [
+        {
+          "summary": { "ru": "Ставится после слова: «только/лишь»." },
+          "details": [
+            {
+              "ru": "sukoshi (сукоси) — «немного»; + dake усиливает: sukoshi dake — «совсем чуть-чуть»."
+            },
+            { "ru": "Частый ответ «да, немного»: hai, sukoshi dake (хай, сукоси дакэ)." }
+          ],
+          "examples": [
+            {
+              "kind": "phrase",
+              "forms": [
+                { "surface": "少しだけ", "romaji": "sukoshi dake", "cyrillic": "сукоси дакэ" }
+              ],
+              "note": { "ru": "совсем чуть-чуть" }
+            }
+          ]
+        }
+      ],
+      "deeper": [
+        {
+          "summary": {
+            "ru": "В разговоре вместо sukoshi часто chotto (тётто) — то же, но менее формально."
+          },
+          "examples": [
+            {
+              "kind": "phrase",
+              "forms": [
+                { "surface": "ちょっとだけ", "romaji": "chotto dake", "cyrillic": "тётто дакэ" }
+              ],
+              "note": { "ru": "чуть-чуть (разговорно)" }
+            }
+          ]
+        }
+      ]
+    },
+    "omit-pronoun": {
+      "id": "omit-pronoun",
+      "title": { "ru": "Почему нет «я» и «вы»" },
+      "body": [
+        {
+          "summary": {
+            "ru": "Японский опускает местоимения, когда ясно из контекста. Подлежащее достраивается само."
+          },
+          "details": [
+            { "ru": "hanasemasen без «я» → по умолчанию про говорящего: «я не могу»." },
+            { "ru": "hanasemasu ka без «вы» → вопрос обращён к собеседнику: «вы можете?»." },
+            { "ru": "Глагол не меняется по лицам — кто действует, ясно из ситуации." },
+            {
+              "ru": "Добавлять watashi (ватаси, «я») / anata (аната, «вы») каждый раз звучит неестественно, а anata в лицо часто невежливо."
+            }
+          ],
+          "examples": [
+            {
+              "kind": "plain",
+              "text": {
+                "ru": "hanasemasu = «(я) могу говорить»; hanasemasu ka = «(вы) можете?» — одно слово, разница в ka и контексте."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "synonymGroups": {},
+  "patterns": {
+    "speak_lang": {
+      "id": "speak_lang",
+      "explanation": { "ru": "[язык] + wa + hanasemasu + ka. Меняешь только язык." },
+      "slotType": "language",
+      "grammarNoteIds": ["wa", "potential", "ka"]
+    }
+  },
+  "sentences": {
+    "greet": {
+      "id": "greet",
+      "tokens": [{ "tokenId": "konnichiwa" }],
+      "translation": { "ru": "Здравствуйте." },
+      "romaji": "Konnichiwa.",
+      "cyrillicGuide": { "ru": "конничива" },
+      "audio": "greet"
+    },
+    "q_eigo": {
+      "id": "q_eigo",
+      "tokens": [
+        { "tokenId": "eigo", "slotType": "language", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "hanasemasu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Вы говорите по-английски?" },
+      "romaji": "Eigo wa hanasemasu ka?",
+      "cyrillicGuide": { "ru": "эйго ва ханасэмас ка" },
+      "audio": "q_eigo",
+      "patternId": "speak_lang"
+    },
+    "q_roshiago": {
+      "id": "q_roshiago",
+      "tokens": [
+        { "tokenId": "roshiago", "slotType": "language", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "hanasemasu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Вы говорите по-русски?" },
+      "romaji": "Roshiago wa hanasemasu ka?",
+      "cyrillicGuide": { "ru": "росиаго ва ханасэмас ка" },
+      "audio": "q_roshiago",
+      "patternId": "speak_lang"
+    },
+    "q_chuugokugo": {
+      "id": "q_chuugokugo",
+      "tokens": [
+        { "tokenId": "chuugokugo", "slotType": "language", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "hanasemasu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Вы говорите по-китайски?" },
+      "romaji": "Chūgokugo wa hanasemasu ka?",
+      "cyrillicGuide": { "ru": "тю:гокуго ва ханасэмас ка" },
+      "audio": "q_chuugokugo",
+      "patternId": "speak_lang"
+    },
+    "q_furansugo": {
+      "id": "q_furansugo",
+      "tokens": [
+        { "tokenId": "furansugo", "slotType": "language", "isFocusSlot": true },
+        { "tokenId": "wa" },
+        { "tokenId": "hanasemasu" },
+        { "tokenId": "ka" }
+      ],
+      "translation": { "ru": "Вы говорите по-французски?" },
+      "romaji": "Furansugo wa hanasemasu ka?",
+      "cyrillicGuide": { "ru": "фурансуго ва ханасэмас ка" },
+      "audio": "q_furansugo",
+      "patternId": "speak_lang"
+    },
+    "cant_jp": {
+      "id": "cant_jp",
+      "tokens": [{ "tokenId": "nihongo" }, { "tokenId": "wa" }, { "tokenId": "hanasemasen" }],
+      "translation": { "ru": "Я не говорю по-японски." },
+      "romaji": "Nihongo wa hanasemasen.",
+      "cyrillicGuide": { "ru": "нихонго ва ханасэмасэн" },
+      "audio": "cant_jp",
+      "grammarNoteIds": ["omit-pronoun"]
+    },
+    "little_jp": {
+      "id": "little_jp",
+      "tokens": [
+        { "tokenId": "nihongo" },
+        { "tokenId": "wa" },
+        { "tokenId": "sukoshi" },
+        { "tokenId": "dake" },
+        { "tokenId": "hanasemasu" }
+      ],
+      "translation": { "ru": "По-японски говорю только чуть-чуть." },
+      "romaji": "Nihongo wa sukoshi dake hanasemasu.",
+      "cyrillicGuide": { "ru": "нихонго ва сукоси дакэ ханасэмас" },
+      "audio": "little_jp"
+    },
+    "staff_welcome": {
+      "id": "staff_welcome",
+      "tokens": [{ "tokenId": "irasshaimase" }],
+      "translation": { "ru": "Добро пожаловать." },
+      "romaji": "Irasshaimase.",
+      "cyrillicGuide": { "ru": "ирассяимасэ" },
+      "audio": "staff_welcome"
+    },
+    "staff_hai": {
+      "id": "staff_hai",
+      "tokens": [{ "tokenId": "hai" }, { "tokenId": "sukoshi" }, { "tokenId": "dake" }],
+      "translation": { "ru": "Да, немного." },
+      "romaji": "Hai, sukoshi dake.",
+      "cyrillicGuide": { "ru": "хай, сукоси дакэ" },
+      "audio": "staff_hai"
+    }
+  },
+  "dialogs": {
+    "language_help": {
+      "id": "language_help",
+      "title": { "ru": "Говорите по-английски?" },
+      "turns": [
+        { "speaker": "user", "sentenceId": "greet" },
+        { "speaker": "staff", "sentenceId": "staff_welcome" },
+        { "speaker": "user", "sentenceId": "q_eigo" },
+        { "speaker": "staff", "sentenceId": "staff_hai" }
+      ]
+    }
+  }
+}

@@ -2,10 +2,10 @@
   "version": 1,
   "tracks": [
     {
-      "id": "shop",
-      "title": { "ru": "В магазине" },
-      "description": { "ru": "Спросить цену, купить, понять кассира." },
-      "lessons": [{ "id": "konbini_buy", "title": { "ru": "Покупка в конбини" } }]
+      "id": "communication",
+      "title": { "ru": "Языковой барьер" },
+      "description": { "ru": "Спросить, говорит ли человек по-английски." },
+      "lessons": [{ "id": "language_barrier", "title": { "ru": "Языковой барьер" } }]
     }
   ]
 }

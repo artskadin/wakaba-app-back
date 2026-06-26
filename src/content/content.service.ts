@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma, Token } from '@prisma/client';
+import { GrammarNote, Prisma, Token } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -37,7 +37,11 @@ export class ContentService {
     const sentences = await this.loadSentences(lesson.steps, dialogs);
     const tokens = await this.loadTokens(sentences);
     const patterns = await this.loadPatterns(lesson.steps, sentences);
-    const grammarNotes = await this.loadGrammarNotes(tokens, patterns);
+    const grammarNotes = await this.loadGrammarNotes(
+      tokens,
+      patterns,
+      sentences,
+    );
 
     return {
       lesson: {
@@ -60,11 +64,7 @@ export class ContentService {
   async getTokenDetail(id: string) {
     const token = await this.prisma.token.findUnique({
       where: { id },
-      include: {
-        grammarNote: {
-          include: { examples: { orderBy: { position: 'asc' } } },
-        },
-      },
+      include: { grammarNote: true },
     });
 
     if (!token) {
@@ -125,11 +125,14 @@ export class ContentService {
 
     return this.prisma.sentence.findMany({
       where: { id: { in: [...sentenceIds] } },
-      include: { tokens: { orderBy: { position: 'asc' } } },
+      include: {
+        tokens: { orderBy: { position: 'asc' } },
+        grammarNotes: { orderBy: { position: 'asc' } },
+      },
     });
   }
 
-  private loadTokens(sentences: SentenceWithTokens[]) {
+  private loadTokens(sentences: SentenceWithRelations[]) {
     const tokenIds = new Set<string>();
     for (const sentence of sentences) {
       for (const st of sentence.tokens) {
@@ -144,7 +147,7 @@ export class ContentService {
 
   private loadPatterns(
     steps: StepWithSiblings[],
-    sentences: SentenceWithTokens[],
+    sentences: SentenceWithRelations[],
   ) {
     const patternIds = new Set<string>();
     for (const step of steps) {
@@ -165,7 +168,11 @@ export class ContentService {
     });
   }
 
-  private loadGrammarNotes(tokens: Token[], patterns: PatternWithNotes[]) {
+  private loadGrammarNotes(
+    tokens: Token[],
+    patterns: PatternWithNotes[],
+    sentences: SentenceWithRelations[],
+  ) {
     const grammarNoteIds = new Set<string>();
     for (const token of tokens) {
       if (token.grammarNoteId) {
@@ -179,18 +186,20 @@ export class ContentService {
       }
     }
 
+    for (const sentece of sentences) {
+      for (const link of sentece.grammarNotes) {
+        grammarNoteIds.add(link.grammarNoteId);
+      }
+    }
+
     return this.prisma.grammarNote.findMany({
       where: { id: { in: [...grammarNoteIds] } },
-      include: { examples: { orderBy: { position: 'asc' } } },
     });
   }
 }
 
-type SentenceWithTokens = Prisma.SentenceGetPayload<{
-  include: { tokens: true };
-}>;
-type NoteWithExamples = Prisma.GrammarNoteGetPayload<{
-  include: { examples: true };
+type SentenceWithRelations = Prisma.SentenceGetPayload<{
+  include: { tokens: true; grammarNotes: true };
 }>;
 type PatternWithNotes = Prisma.PatternGetPayload<{
   include: { grammarNotes: true };
@@ -223,13 +232,12 @@ function toBundleToken(token: Token) {
     cyrillic: token.cyrillic,
     gloss: token.gloss,
     type: token.type,
-    ...(token.audioKey ? { audioKey: token.audioKey } : {}),
     ...(token.grammarNoteId ? { grammarNoteId: token.grammarNoteId } : {}),
     ...(token.synonymGroupId ? { synonymGroupId: token.synonymGroupId } : {}),
   };
 }
 
-function toBundleSentence(sentence: SentenceWithTokens) {
+function toBundleSentence(sentence: SentenceWithRelations) {
   return {
     id: sentence.id,
     tokens: sentence.tokens.map((st) => ({
@@ -240,18 +248,23 @@ function toBundleSentence(sentence: SentenceWithTokens) {
     translation: sentence.translation,
     romaji: sentence.romaji,
     cyrillicGuide: sentence.cyrillicGuide,
-    audioKey: sentence.audioKey,
     ...(sentence.patternId ? { patternId: sentence.patternId } : {}),
+    ...(sentence.grammarNotes.length
+      ? {
+          grammarNoteIds: sentence.grammarNotes.map(
+            (note) => note.grammarNoteId,
+          ),
+        }
+      : {}),
   };
 }
 
-function toBundleNote(note: NoteWithExamples) {
+function toBundleNote(note: GrammarNote) {
   return {
     id: note.id,
     title: note.title,
     body: note.body,
     ...(note.deeper ? { deeper: note.deeper } : {}),
-    examples: note.examples.map((ex) => ex.payload),
   };
 }
 
