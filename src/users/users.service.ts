@@ -14,11 +14,21 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
-  create(email: string, passwordHash: string) {
-    return this.prisma.user.create({ data: { email, passwordHash } });
+  create(data: {
+    email: string;
+    passwordHash: string;
+    firstName: string;
+    lastName: string;
+  }) {
+    return this.prisma.user.create({ data });
   }
 
-  update(id: string, data: Partial<Pick<User, 'email' | 'passwordHash'>>) {
+  update(
+    id: string,
+    data: Partial<
+      Pick<User, 'email' | 'passwordHash' | 'firstName' | 'lastName'>
+    >,
+  ) {
     return this.prisma.user.update({ where: { id }, data });
   }
 }

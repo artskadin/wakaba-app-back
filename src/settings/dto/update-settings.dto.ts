@@ -1,8 +1,12 @@
-import { Voice } from '@prisma/client';
+import { Theme, Voice } from '@prisma/client';
 import { IsEnum, IsOptional } from 'class-validator';
 
 export class UpdateSettingsDto {
   @IsOptional()
   @IsEnum(Voice)
   voice?: 'm' | 'f';
+
+  @IsOptional()
+  @IsEnum(Theme)
+  theme?: Theme;
 }

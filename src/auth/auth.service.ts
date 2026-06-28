@@ -3,12 +3,14 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+import { User } from '@prisma/client';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import argon2 from 'argon2';
 import { randomUUID } from 'crypto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from 'src/users/users.service';
+import { RegisterInput, UpdateProfileInput } from './auth.types';
 
 const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -20,17 +22,28 @@ export class AuthService {
     private config: ConfigService,
     private prisma: PrismaService,
   ) {}
-  async register(email: string, password: string) {
-    const existing = await this.users.findByEmail(email);
+  async register(input: RegisterInput) {
+    const existing = await this.users.findByEmail(input.email);
 
     if (existing) {
       throw new ConflictException('This email is already in use');
     }
 
-    const passwordHash = await argon2.hash(password);
-    const user = await this.users.create(email, passwordHash);
+    const passwordHash = await argon2.hash(input.password);
 
-    return { id: user.id, email: user.email };
+    const user = await this.users.create({
+      email: input.email,
+      passwordHash,
+      firstName: input.firstName,
+      lastName: input.lastName,
+    });
+
+    const tokens = await this.issueTokens(user.id, user.email);
+
+    return {
+      user: this.toProfile(user),
+      ...tokens,
+    };
   }
 
   async refresh(token: string) {
@@ -81,7 +94,7 @@ export class AuthService {
     const tokens = await this.issueTokens(user.id, user.email);
 
     return {
-      user: { id: user.id, email: user.email, createdAt: user.createdAt },
+      user: this.toProfile(user),
       ...tokens,
     };
   }
@@ -132,6 +145,22 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    return { id: user.id, email: user.email, createdAt: user.createdAt };
+    return this.toProfile(user);
+  }
+
+  async updateProfile(userId: string, input: UpdateProfileInput) {
+    const user = await this.users.update(userId, input);
+
+    return this.toProfile(user);
+  }
+
+  private toProfile(user: User) {
+    return {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      createdAt: user.createdAt,
+    };
   }
 }

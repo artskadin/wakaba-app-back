@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Voice } from '@prisma/client';
+import { Theme, Voice } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class SettingsService {
     });
   }
 
-  update(userId: string, data: { voice?: Voice }) {
+  update(userId: string, data: { voice?: Voice; theme?: Theme }) {
     return this.prisma.userSettings.upsert({
       where: { userId },
       create: { userId, ...data },

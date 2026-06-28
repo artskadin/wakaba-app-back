@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   Req,
   Res,
@@ -9,29 +10,27 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register.dto';
-import { LoginDto } from './dto/login.dto';
 import { type Response, type Request } from 'express';
 import { CurrentUser } from './current-user.decorator';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { type AuthUser } from './auth.types';
+import { LoginDto, RegisterDto, UpdateProfileDto } from './dto';
 
 const REFRESH_COOKIE = 'refreshToken';
-const refreshCookieOptions = {
-  httpOnly: true,
-  secure: false,
-  sameSite: 'lax' as const,
-  path: '/auth',
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-};
 
 @Controller('auth')
 export class AuthController {
   constructor(private auth: AuthService) {}
 
   @Post('register')
-  register(@Body() dto: RegisterDto) {
-    return this.auth.register(dto.email, dto.password);
+  async register(
+    @Body() dto: RegisterDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { accessToken, refreshToken, user } = await this.auth.register(dto);
+    this.setRefreshCookie(res, refreshToken);
+
+    return { accessToken, user };
   }
 
   @Post('login')
@@ -44,7 +43,7 @@ export class AuthController {
       dto.password,
     );
 
-    res.cookie(REFRESH_COOKIE, refreshToken, refreshCookieOptions);
+    this.setRefreshCookie(res, refreshToken);
 
     return { user, accessToken };
   }
@@ -61,7 +60,7 @@ export class AuthController {
 
     const { accessToken, refreshToken } = await this.auth.refresh(token);
 
-    res.cookie(REFRESH_COOKIE, refreshToken, refreshCookieOptions);
+    this.setRefreshCookie(res, refreshToken);
 
     return { accessToken };
   }
@@ -78,9 +77,27 @@ export class AuthController {
     return { ok: true };
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('me')
+  @UseGuards(JwtAuthGuard)
   me(@CurrentUser() user: AuthUser) {
     return this.auth.getProfile(user.id);
+  }
+
+  @Patch('me')
+  @UseGuards(JwtAuthGuard)
+  updateProfile(@CurrentUser() user: AuthUser, @Body() dto: UpdateProfileDto) {
+    return this.auth.updateProfile(user.id, dto);
+  }
+
+  private setRefreshCookie(res: Response, token: string) {
+    const refreshCookieOptions = {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax' as const,
+      path: '/auth',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    };
+
+    res.cookie(REFRESH_COOKIE, token, refreshCookieOptions);
   }
 }
