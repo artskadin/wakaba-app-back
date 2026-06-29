@@ -69,7 +69,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    await this.prisma.refreshToken.delete({ where: { id: payload.jti } });
+    const deleted = await this.prisma.refreshToken.deleteMany({
+      where: { id: payload.jti },
+    });
+    if (deleted.count === 0) {
+      throw new UnauthorizedException('Session expired');
+    }
 
     const user = await this.users.findById(payload.sub);
     if (!user) {

@@ -1,17 +1,46 @@
 import { Injectable } from '@nestjs/common';
-import { FavouriteItemType } from '@prisma/client';
+import { FavouriteItemType, Token } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class FavouritesService {
   constructor(private prisma: PrismaService) {}
 
-  getForUser(userId: string) {
-    return this.prisma.favourite.findMany({
+  async getForUser(userId: string) {
+    const rows = await this.prisma.favourite.findMany({
       where: { userId },
-      include: { token: true, sentence: true },
       orderBy: { createdAt: 'desc' },
+      include: {
+        token: true,
+        sentence: {
+          include: {
+            tokens: { orderBy: { position: 'asc' }, include: { token: true } },
+          },
+        },
+      },
     });
+
+    return rows.map((f) => ({
+      id: f.id,
+      itemType: f.itemType,
+      tokenId: f.tokenId,
+      sentenceId: f.sentenceId,
+      createdAt: f.createdAt,
+      token: f.token ? this.toToken(f.token) : null,
+      sentence: f.sentence
+        ? {
+            id: f.sentence.id,
+            romaji: f.sentence.romaji,
+            translation: f.sentence.translation,
+            cyrillicGuide: f.sentence.cyrillicGuide,
+            tokens: f.sentence.tokens.map((st) => ({
+              token: this.toToken(st.token),
+              slotType: st.slotType,
+              isFocuced: st.isFocusSlot,
+            })),
+          }
+        : null,
+    }));
   }
 
   async add(
@@ -46,5 +75,19 @@ export class FavouritesService {
     });
 
     return { ok: true };
+  }
+
+  private toToken(t: Token) {
+    return {
+      id: t.id,
+      surface: t.surface,
+      reading: t.reading,
+      romaji: t.romaji,
+      cyrillic: t.cyrillic,
+      gloss: t.gloss,
+      type: t.type,
+      ...(t.grammarNoteId ? { grammarNoteId: t.grammarNoteId } : {}),
+      ...(t.synonymGroupId ? { synonymGroupId: t.synonymGroupId } : {}),
+    };
   }
 }
