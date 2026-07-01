@@ -12,8 +12,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from 'src/users/users.service';
 import { RegisterInput, UpdateProfileInput } from './auth.types';
 
-const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -130,13 +128,15 @@ export class AuthService {
       },
     );
 
+    const { exp } = this.jwt.decode<{ exp: number }>(refreshToken);
+
     const tokenHash = await argon2.hash(refreshToken);
     await this.prisma.refreshToken.create({
       data: {
         id: jti,
         tokenHash,
         userId,
-        expiresAt: new Date(Date.now() + REFRESH_TTL_MS),
+        expiresAt: new Date(exp * 1000),
       },
     });
 
