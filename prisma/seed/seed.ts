@@ -160,6 +160,8 @@ async function seedLesson(bundle: LessonBundle) {
           position: idx,
           slotType: ref.slotType ?? null,
           isFocusSlot: ref.isFocusSlot ?? false,
+          before: ref.before ?? null,
+          after: ref.after ?? null,
         })),
       });
 

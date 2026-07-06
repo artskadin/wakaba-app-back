@@ -11,7 +11,7 @@ export class ContentService {
       orderBy: { position: 'asc' },
       include: {
         lessons: {
-          select: { id: true, title: true },
+          select: { id: true, title: true, context: true },
           orderBy: { position: 'asc' },
         },
       },
@@ -26,6 +26,7 @@ export class ContentService {
         lessons: track.lessons.map((lesson) => ({
           id: lesson.id,
           title: lesson.title,
+          context: lesson.context,
         })),
       })),
     };
@@ -38,6 +39,7 @@ export class ContentService {
     const tokens = await this.loadTokens(sentences);
     const patterns = await this.loadPatterns(lesson.steps, sentences);
     const grammarNotes = await this.loadGrammarNotes(
+      lesson.steps,
       tokens,
       patterns,
       sentences,
@@ -82,7 +84,10 @@ export class ContentService {
       include: {
         steps: {
           orderBy: { position: 'asc' },
-          include: { siblings: { orderBy: { position: 'asc' } } },
+          include: {
+            siblings: { orderBy: { position: 'asc' } },
+            grammarNotes: { orderBy: { position: 'asc' } },
+          },
         },
       },
     });
@@ -94,7 +99,7 @@ export class ContentService {
     return lesson;
   }
 
-  private loadDialogs(steps: StepWithSiblings[]) {
+  private loadDialogs(steps: StepWithRelations[]) {
     const dialogIds = steps.flatMap((step) =>
       step.dialogId ? [step.dialogId] : [],
     );
@@ -105,7 +110,10 @@ export class ContentService {
     });
   }
 
-  private loadSentences(steps: StepWithSiblings[], dialogs: DialogWithTurns[]) {
+  private loadSentences(
+    steps: StepWithRelations[],
+    dialogs: DialogWithTurns[],
+  ) {
     const sentenceIds = new Set<string>();
     for (const step of steps) {
       if (step.sentenceId) {
@@ -146,7 +154,7 @@ export class ContentService {
   }
 
   private loadPatterns(
-    steps: StepWithSiblings[],
+    steps: StepWithRelations[],
     sentences: SentenceWithRelations[],
   ) {
     const patternIds = new Set<string>();
@@ -164,16 +172,18 @@ export class ContentService {
 
     return this.prisma.pattern.findMany({
       where: { id: { in: [...patternIds] } },
-      include: { grammarNotes: true },
+      include: { grammarNotes: { orderBy: { position: 'asc' } } },
     });
   }
 
   private loadGrammarNotes(
+    steps: StepWithRelations[],
     tokens: Token[],
     patterns: PatternWithNotes[],
     sentences: SentenceWithRelations[],
   ) {
     const grammarNoteIds = new Set<string>();
+
     for (const token of tokens) {
       if (token.grammarNoteId) {
         grammarNoteIds.add(token.grammarNoteId);
@@ -192,6 +202,12 @@ export class ContentService {
       }
     }
 
+    for (const step of steps) {
+      for (const link of step.grammarNotes) {
+        grammarNoteIds.add(link.grammarNoteId);
+      }
+    }
+
     return this.prisma.grammarNote.findMany({
       where: { id: { in: [...grammarNoteIds] } },
     });
@@ -206,9 +222,13 @@ type PatternWithNotes = Prisma.PatternGetPayload<{
 }>;
 type DialogWithTurns = Prisma.DialogGetPayload<{ include: { turns: true } }>;
 type LessonWithSteps = Prisma.LessonGetPayload<{
-  include: { steps: { include: { siblings: true } } };
+  include: {
+    steps: {
+      include: { siblings: true; grammarNotes: true };
+    };
+  };
 }>;
-type StepWithSiblings = LessonWithSteps['steps'][number];
+type StepWithRelations = LessonWithSteps['steps'][number];
 
 function byId<T extends { id: string }, R>(
   items: T[],
@@ -244,6 +264,8 @@ function toBundleSentence(sentence: SentenceWithRelations) {
       tokenId: st.tokenId,
       ...(st.slotType ? { slotType: st.slotType } : {}),
       ...(st.isFocusSlot ? { isFocusSlot: st.isFocusSlot } : {}),
+      ...(st.before ? { before: st.before } : {}),
+      ...(st.after ? { after: st.after } : {}),
     })),
     translation: sentence.translation,
     romaji: sentence.romaji,
@@ -262,7 +284,7 @@ function toBundleSentence(sentence: SentenceWithRelations) {
 function toBundleNote(note: GrammarNote) {
   return {
     id: note.id,
-    title: note.title,
+    ...(note.title ? { title: note.title } : {}),
     body: note.body,
     ...(note.deeper ? { deeper: note.deeper } : {}),
   };
@@ -288,9 +310,13 @@ function toBundleDialog(dialog: DialogWithTurns) {
   };
 }
 
-function toBundleStep(step: StepWithSiblings) {
+function toBundleStep(step: StepWithRelations) {
+  const notes = step.grammarNotes.length
+    ? { grammarNoteIds: step.grammarNotes.map((l) => l.grammarNoteId) }
+    : {};
+
   if (step.kind === 'dialog') {
-    return { kind: step.kind, dialogId: step.dialogId };
+    return { kind: step.kind, dialogId: step.dialogId, ...notes };
   }
 
   if (step.kind === 'teach') {
@@ -301,8 +327,9 @@ function toBundleStep(step: StepWithSiblings) {
       ...(step.siblings.length
         ? { siblingSentenceIds: step.siblings.map((s) => s.sentenceId) }
         : {}),
+      ...notes,
     };
   }
 
-  return { kind: step.kind, sentenceId: step.sentenceId };
+  return { kind: step.kind, sentenceId: step.sentenceId, ...notes };
 }

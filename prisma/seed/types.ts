@@ -21,6 +21,8 @@ export interface TokenRef {
   tokenId: string;
   slotType?: string;
   isFocusSlot?: boolean;
+  before?: string;
+  after?: string;
 }
 
 export interface BundleToken {

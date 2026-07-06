@@ -86,18 +86,19 @@ enum StepKind {
 }
 
 model LessonStep {
-  id         String              @id
-  lessonId   String
-  lesson     Lesson              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  position   Int
-  kind       StepKind
-  sentenceId String?
-  sentence   Sentence?           @relation(fields: [sentenceId], references: [id], onDelete: SetNull)
-  dialogId   String?
-  dialog     Dialog?             @relation(fields: [dialogId], references: [id], onDelete: SetNull)
-  patternId  String?
-  pattern    Pattern?            @relation(fields: [patternId], references: [id], onDelete: SetNull)
-  siblings   LessonStepSibling[]
+  id           String                  @id
+  lessonId     String
+  lesson       Lesson                  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  position     Int
+  kind         StepKind
+  sentenceId   String?
+  sentence     Sentence?               @relation(fields: [sentenceId], references: [id], onDelete: SetNull)
+  dialogId     String?
+  dialog       Dialog?                 @relation(fields: [dialogId], references: [id], onDelete: SetNull)
+  patternId    String?
+  pattern      Pattern?                @relation(fields: [patternId], references: [id], onDelete: SetNull)
+  grammarNotes LessonStepGrammarNote[]
+  siblings     LessonStepSibling[]
 }
 
 model LessonStepSibling {
@@ -122,15 +123,16 @@ model Pattern {
 }
 
 model GrammarNote {
-  id                   String                @id
-  title                Json
-  body                 Json
-  deeper               Json?
-  patterns             PatternGrammarNote[]
-  tokens               Token[]
-  sentenceGrammarNotes SentenceGrammarNote[]
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
+  id                     String                  @id
+  title                  Json?
+  body                   Json
+  deeper                 Json?
+  patterns               PatternGrammarNote[]
+  tokens                 Token[]
+  sentenceGrammarNotes   SentenceGrammarNote[]
+  lessonStepGrammarNotes LessonStepGrammarNote[]
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
 }
 
 model SentenceGrammarNote {
@@ -143,11 +145,22 @@ model SentenceGrammarNote {
   @@id([sentenceId, grammarNoteId])
 }
 
+model LessonStepGrammarNote {
+  lessonStepId  String
+  lessonStep    LessonStep  @relation(fields: [lessonStepId], references: [id], onDelete: Cascade)
+  grammarNoteId String
+  grammarNote   GrammarNote @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
+  position      Int         @default(0)
+
+  @@id([lessonStepId, grammarNoteId])
+}
+
 model PatternGrammarNote {
   patternId     String
   pattern       Pattern     @relation(fields: [patternId], references: [id], onDelete: Cascade)
   grammarNoteId String
   grammarNote   GrammarNote @relation(fields: [grammarNoteId], references: [id], onDelete: Cascade)
+  position      Int         @default(0)
 
   @@id([patternId, grammarNoteId])
 }
@@ -236,6 +249,8 @@ model SentenceToken {
   tokenId     String
   token       Token    @relation(fields: [tokenId], references: [id], onDelete: Restrict)
   position    Int
+  before      String?
+  after       String?
   slotType    String?
   isFocusSlot Boolean  @default(false)
 }
