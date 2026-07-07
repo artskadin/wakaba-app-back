@@ -11,7 +11,7 @@ export type EntityKind =
   | 'pattern'
   | 'sentence'
   | 'dialog'
-  | 'lessons'
+  | 'lesson'
   | 'track';
 
 export interface TokenInput {

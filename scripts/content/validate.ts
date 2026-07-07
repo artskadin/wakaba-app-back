@@ -22,7 +22,7 @@ export function validate(graph: ContentGraph): Problem[] {
   graph.patterns.forEach((_, id) => claim(id, 'pattern'));
   graph.sentences.forEach((_, id) => claim(id, 'sentence'));
   graph.dialogs.forEach((_, id) => claim(id, 'dialog'));
-  graph.lessons.forEach((_, id) => claim(id, 'lessons'));
+  graph.lessons.forEach((_, id) => claim(id, 'lesson'));
   graph.tracks.forEach((_, id) => claim(id, 'track'));
 
   const need = (

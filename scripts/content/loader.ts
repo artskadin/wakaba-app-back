@@ -52,7 +52,14 @@ function loadMap<T extends { id: string }>(
   const problems: Problem[] = [];
 
   for (const file of collectFiles(dir, name)) {
-    const obj = readJson(file) as Record<string, T>;
+    const { data, problem } = readJson(file);
+
+    if (problem) {
+      problems.push(problem);
+      continue;
+    }
+
+    const obj = data as Record<string, T>;
 
     for (const [key, entity] of Object.entries(obj)) {
       if (entity.id !== key) {
@@ -87,7 +94,15 @@ function loadLesson(dir: string): {
   const problems: Problem[] = [];
 
   for (const file of collectFiles(dir, 'lessons')) {
-    const lesson = readJson(file) as LessonInput;
+    const { data, problem } = readJson(file);
+
+    if (problem) {
+      problems.push(problem);
+      continue;
+    }
+
+    const lesson = data as LessonInput;
+
     if (map.has(lesson.id)) {
       problems.push({
         level: 'error',
@@ -117,7 +132,14 @@ function loadTracks(dir: string): {
     return { map, problems };
   }
 
-  const tracks = readJson(filePath) as TrackInput[];
+  const { data, problem } = readJson(filePath);
+
+  if (problem) {
+    problems.push(problem);
+    return { map, problems };
+  }
+
+  const tracks = data as TrackInput[];
 
   for (const track of tracks) {
     if (map.has(track.id)) {
