@@ -1,4 +1,4 @@
-import type { Speaker, TokenType } from '@prisma/client';
+import type { Speaker, TokenType, Voice } from '@prisma/client';
 
 export interface LocalizedText {
   ru: string;
@@ -40,7 +40,6 @@ export interface SentenceInput {
   translation: LocalizedText;
   romaji: string;
   cyrillicGuide: LocalizedText;
-  audio?: string;
   patternId?: string;
   grammarNoteIds?: string[];
 }
@@ -118,4 +117,55 @@ export interface ContentGraph {
 export interface Problem {
   level: 'error' | 'warning';
   message: string;
+}
+
+export interface OrphanReport {
+  tokens: string[];
+  notes: string[];
+  patterns: string[];
+  sentences: string[];
+  dialogs: string[];
+}
+
+export interface AudioSlice {
+  done: number;
+  total: number;
+  missing: string[];
+}
+
+export interface AudioReport {
+  sentences: AudioSlice;
+  tokens: AudioSlice;
+}
+
+export interface AudioItem {
+  category: 'tokens' | 'sentences';
+  id: string;
+  voice: Voice;
+  file: string;
+  surface: string;
+  reading: string;
+  romaji: string;
+  translation: string;
+}
+
+export interface AudioPlanOptions {
+  voices?: Voice[];
+  ids?: { tokens: string[]; sentences: string[] };
+}
+
+export interface AudioEntity {
+  category: 'tokens' | 'sentences';
+  id: string;
+  surface: string;
+  reading: string;
+  romaji: string;
+  translation: string;
+  voices: Voice[];
+}
+
+export interface Reference {
+  kind: string;
+  owner: string;
+  detail: string;
 }

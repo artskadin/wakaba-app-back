@@ -1,0 +1,26 @@
+{
+  "language-help": {
+    "id": "language-help",
+    "title": {
+      "ru": "Узнайте, говорит ли собеседник по-английски?"
+    },
+    "turns": [
+      {
+        "speaker": "user",
+        "sentenceId": "greeting-konnichiwa"
+      },
+      {
+        "speaker": "staff",
+        "sentenceId": "staff-welcome"
+      },
+      {
+        "speaker": "user",
+        "sentenceId": "ask-speak-english"
+      },
+      {
+        "speaker": "staff",
+        "sentenceId": "staff-yes-little"
+      }
+    ]
+  }
+}

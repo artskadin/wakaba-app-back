@@ -1,0 +1,14 @@
+{
+  "sukoshi": {
+    "id": "sukoshi",
+    "surface": "少し",
+    "reading": "すこし",
+    "romaji": "sukoshi",
+    "cyrillic": "сукоси",
+    "gloss": {
+      "ru": "немного / чуть-чуть"
+    },
+    "type": "adverb",
+    "grammarNoteId": "sukoshi-note"
+  }
+}

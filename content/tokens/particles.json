@@ -1,0 +1,38 @@
+{
+  "wa": {
+    "id": "wa",
+    "surface": "は",
+    "reading": "は",
+    "romaji": "wa",
+    "cyrillic": "ва",
+    "gloss": {
+      "ru": "(тема)"
+    },
+    "type": "particle",
+    "grammarNoteId": "wa-note"
+  },
+  "ka": {
+    "id": "ka",
+    "surface": "か",
+    "reading": "か",
+    "romaji": "ka",
+    "cyrillic": "ка",
+    "gloss": {
+      "ru": "(частица вопроса)"
+    },
+    "type": "ending",
+    "grammarNoteId": "ka-note"
+  },
+  "dake": {
+    "id": "dake",
+    "surface": "だけ",
+    "reading": "だけ",
+    "romaji": "dake",
+    "cyrillic": "дакэ",
+    "gloss": {
+      "ru": "только / лишь"
+    },
+    "type": "particle",
+    "grammarNoteId": "dake-note"
+  }
+}

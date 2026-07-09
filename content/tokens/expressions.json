@@ -1,0 +1,36 @@
+{
+  "konnichiwa": {
+    "id": "konnichiwa",
+    "surface": "こんにちは",
+    "reading": "こんにちは",
+    "romaji": "konnichiwa",
+    "cyrillic": "коннитива",
+    "gloss": {
+      "ru": "здравствуйте"
+    },
+    "type": "expression",
+    "grammarNoteId": "konnichiwa-note"
+  },
+  "irasshaimase": {
+    "id": "irasshaimase",
+    "surface": "いらっしゃいませ",
+    "reading": "いらっしゃいませ",
+    "romaji": "irasshaimase",
+    "cyrillic": "ирассяимасэ",
+    "gloss": {
+      "ru": "добро пожаловать (от персонала)"
+    },
+    "type": "expression"
+  },
+  "hai": {
+    "id": "hai",
+    "surface": "はい",
+    "reading": "はい",
+    "romaji": "hai",
+    "cyrillic": "хай",
+    "gloss": {
+      "ru": "да"
+    },
+    "type": "expression"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "hanasemasu": {
+    "id": "hanasemasu",
+    "surface": "話せます",
+    "reading": "はなせます",
+    "romaji": "hanasemasu",
+    "cyrillic": "ханасэмас",
+    "gloss": {
+      "ru": "могу говорить"
+    },
+    "type": "verb",
+    "grammarNoteId": "potential"
+  },
+  "hanasemasen": {
+    "id": "hanasemasen",
+    "surface": "話せません",
+    "reading": "はなせません",
+    "romaji": "hanasemasen",
+    "cyrillic": "ханасэмасэн",
+    "gloss": {
+      "ru": "не могу говорить"
+    },
+    "type": "verb",
+    "grammarNoteId": "potential"
+  }
+}

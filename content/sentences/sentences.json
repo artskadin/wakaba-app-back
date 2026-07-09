@@ -1,0 +1,191 @@
+{
+  "greeting-konnichiwa": {
+    "id": "greeting-konnichiwa",
+    "tokens": [
+      {
+        "tokenId": "konnichiwa"
+      }
+    ],
+    "translation": {
+      "ru": "Здравствуйте."
+    },
+    "romaji": "Konnichiwa.",
+    "cyrillicGuide": {
+      "ru": "коннитива"
+    }
+  },
+  "ask-speak-english": {
+    "id": "ask-speak-english",
+    "tokens": [
+      {
+        "tokenId": "eigo",
+        "slotType": "language",
+        "isFocusSlot": true
+      },
+      {
+        "tokenId": "wa"
+      },
+      {
+        "tokenId": "hanasemasu"
+      },
+      {
+        "tokenId": "ka"
+      }
+    ],
+    "translation": {
+      "ru": "Вы говорите по-английски?"
+    },
+    "romaji": "Eigo wa hanasemasu ka?",
+    "cyrillicGuide": {
+      "ru": "эйго ва ханасэмас ка"
+    },
+    "patternId": "speak-language"
+  },
+  "ask-speak-russian": {
+    "id": "ask-speak-russian",
+    "tokens": [
+      {
+        "tokenId": "roshiago",
+        "slotType": "language",
+        "isFocusSlot": true
+      },
+      {
+        "tokenId": "wa"
+      },
+      {
+        "tokenId": "hanasemasu"
+      },
+      {
+        "tokenId": "ka"
+      }
+    ],
+    "translation": {
+      "ru": "Вы говорите по-русски?"
+    },
+    "romaji": "Roshiago wa hanasemasu ka?",
+    "cyrillicGuide": {
+      "ru": "росиаго ва ханасэмас ка"
+    },
+    "patternId": "speak-language"
+  },
+  "ask-speak-chinese": {
+    "id": "ask-speak-chinese",
+    "tokens": [
+      {
+        "tokenId": "chuugokugo",
+        "slotType": "language",
+        "isFocusSlot": true
+      },
+      {
+        "tokenId": "wa"
+      },
+      {
+        "tokenId": "hanasemasu"
+      },
+      {
+        "tokenId": "ka"
+      }
+    ],
+    "translation": {
+      "ru": "Вы говорите по-китайски?"
+    },
+    "romaji": "Chūgokugo wa hanasemasu ka?",
+    "cyrillicGuide": {
+      "ru": "тю:гокуго ва ханасэмас ка"
+    },
+    "patternId": "speak-language"
+  },
+  "cannot-speak-japanese": {
+    "id": "cannot-speak-japanese",
+    "tokens": [
+      {
+        "tokenId": "nihongo"
+      },
+      {
+        "tokenId": "wa"
+      },
+      {
+        "tokenId": "hanasemasen"
+      }
+    ],
+    "translation": {
+      "ru": "Я не говорю по-японски."
+    },
+    "romaji": "Nihongo wa hanasemasen.",
+    "cyrillicGuide": {
+      "ru": "нихонго ва ханасэмасэн"
+    },
+    "grammarNoteIds": [
+      "cannot-speak-japanese-note",
+      "omit-pronoun"
+    ]
+  },
+  "speak-little-japanese": {
+    "id": "speak-little-japanese",
+    "tokens": [
+      {
+        "tokenId": "nihongo"
+      },
+      {
+        "tokenId": "wa"
+      },
+      {
+        "tokenId": "sukoshi"
+      },
+      {
+        "tokenId": "dake"
+      },
+      {
+        "tokenId": "hanasemasu"
+      }
+    ],
+    "translation": {
+      "ru": "По-японски говорю только чуть-чуть."
+    },
+    "romaji": "Nihongo wa sukoshi dake hanasemasu.",
+    "cyrillicGuide": {
+      "ru": "нихонго ва сукоси дакэ ханасэмас"
+    },
+    "grammarNoteIds": [
+      "speak-little-japanese-note"
+    ]
+  },
+  "staff-welcome": {
+    "id": "staff-welcome",
+    "tokens": [
+      {
+        "tokenId": "irasshaimase"
+      }
+    ],
+    "translation": {
+      "ru": "Добро пожаловать."
+    },
+    "romaji": "Irasshaimase.",
+    "cyrillicGuide": {
+      "ru": "ирассяимасэ"
+    }
+  },
+  "staff-yes-little": {
+    "id": "staff-yes-little",
+    "tokens": [
+      {
+        "tokenId": "hai",
+        "after": "、"
+      },
+      {
+        "tokenId": "sukoshi"
+      },
+      {
+        "tokenId": "dake",
+        "after": "。"
+      }
+    ],
+    "translation": {
+      "ru": "Да, немного."
+    },
+    "romaji": "Hai, sukoshi dake.",
+    "cyrillicGuide": {
+      "ru": "хай, сукоси дакэ"
+    }
+  }
+}

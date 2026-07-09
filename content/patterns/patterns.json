@@ -1,0 +1,12 @@
+{
+  "speak-language": {
+    "id": "speak-language",
+    "explanation": {
+      "ru": "[язык] + wa + hanasemasu + ka. Меняешь только язык."
+    },
+    "slotType": "language",
+    "grammarNoteIds": [
+      "ask-language"
+    ]
+  }
+}

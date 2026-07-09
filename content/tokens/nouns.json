@@ -1,0 +1,50 @@
+{
+  "eigo": {
+    "id": "eigo",
+    "surface": "英語",
+    "reading": "えいご",
+    "romaji": "eigo",
+    "cyrillic": "эйго",
+    "gloss": {
+      "ru": "английский"
+    },
+    "type": "noun",
+    "grammarNoteId": "go"
+  },
+  "roshiago": {
+    "id": "roshiago",
+    "surface": "ロシア語",
+    "reading": "ろしあご",
+    "romaji": "roshiago",
+    "cyrillic": "росиаго",
+    "gloss": {
+      "ru": "русский"
+    },
+    "type": "noun",
+    "grammarNoteId": "go"
+  },
+  "chuugokugo": {
+    "id": "chuugokugo",
+    "surface": "中国語",
+    "reading": "ちゅうごくご",
+    "romaji": "chūgokugo",
+    "cyrillic": "тю:гокуго",
+    "gloss": {
+      "ru": "китайский"
+    },
+    "type": "noun",
+    "grammarNoteId": "go"
+  },
+  "nihongo": {
+    "id": "nihongo",
+    "surface": "日本語",
+    "reading": "にほんご",
+    "romaji": "nihongo",
+    "cyrillic": "нихонго",
+    "gloss": {
+      "ru": "японский"
+    },
+    "type": "noun",
+    "grammarNoteId": "go"
+  }
+}
