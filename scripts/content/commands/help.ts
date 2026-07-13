@@ -19,6 +19,11 @@ export function printHelp(): void {
                         --lesson <id>  один урок (по умолчанию — все)
                         --out <dir>    куда писать (по умолчанию ./bundles)
     where <id>       Что это за id и кто на него ссылается. Без записи.
+    diff             Сравнить content/ с БД (что создаст/обновит/удалит apply). Без записи.
+    apply            Привести БД к content/ (create/update/delete). Пишет!
+                        --env dev|prod   какую БД смотреть (по умолчанию dev)
+                        --dry-run   показать план и выйти
+                        -y, --yes   без вопроса (для CI): применить всё
 
 
   ${pc.cyan('ОБЩИЕ')}

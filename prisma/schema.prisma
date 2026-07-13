@@ -9,7 +9,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model User {
@@ -86,7 +86,7 @@ enum StepKind {
 }
 
 model LessonStep {
-  id           String                  @id
+  id           String                  @id @default(uuid())
   lessonId     String
   lesson       Lesson                  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   position     Int
@@ -243,7 +243,7 @@ model Sentence {
 }
 
 model SentenceToken {
-  id          String   @id
+  id          String   @id @default(uuid())
   sentenceId  String
   sentence    Sentence @relation(fields: [sentenceId], references: [id], onDelete: Cascade)
   tokenId     String
@@ -270,7 +270,7 @@ enum Speaker {
 }
 
 model DialogTurn {
-  id         String   @id
+  id         String   @id @default(uuid())
   dialogId   String
   dialog     Dialog   @relation(fields: [dialogId], references: [id], onDelete: Cascade)
   position   Int

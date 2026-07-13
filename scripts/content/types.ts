@@ -169,3 +169,21 @@ export interface Reference {
   owner: string;
   detail: string;
 }
+
+export interface Snapshot {
+  tokens: Map<string, unknown>;
+  notes: Map<string, unknown>;
+  patterns: Map<string, unknown>;
+  sentences: Map<string, unknown>;
+  dialogs: Map<string, unknown>;
+  lessons: Map<string, unknown>;
+  tracks: Map<string, unknown>;
+}
+
+export interface EntityDiff {
+  create: string[];
+  update: string[];
+  remove: string[];
+}
+
+export type DiffResult = Record<keyof Snapshot, EntityDiff>;

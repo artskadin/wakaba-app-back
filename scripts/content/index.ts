@@ -7,6 +7,9 @@ import { runStatus } from './commands/status';
 import { runAudio } from './commands/audio';
 import { runBundle } from './commands/bundle';
 import { runWhere } from './commands/where';
+import { runDiff } from './commands/diff';
+import { runApply } from './commands/apply';
+import { parseEnv } from './db';
 
 async function main(): Promise<void> {
   const { values, positionals } = parseArgs({
@@ -19,6 +22,9 @@ async function main(): Promise<void> {
       track: { type: 'string' },
       interactive: { type: 'boolean', short: 'i' },
       out: { type: 'string' },
+      yes: { type: 'boolean', short: 'y' },
+      'dry-run': { type: 'boolean' },
+      env: { type: 'string' },
     },
   });
 
@@ -44,6 +50,12 @@ async function main(): Promise<void> {
       break;
     case 'where':
       process.exit(runWhere(positionals[1]));
+      break;
+    case 'diff':
+      process.exit(await runDiff(parseEnv(values.env)));
+      break;
+    case 'apply':
+      process.exit(await runApply(values, parseEnv(values.env)));
       break;
     default:
       console.error(pc.red(`Неизвестная команда: ${command}`));

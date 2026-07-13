@@ -1,5 +1,5 @@
 import pc from 'picocolors';
-import { ContentGraph, Problem } from './types';
+import { ContentGraph, DiffResult, Problem } from './types';
 
 export function counts(graph: ContentGraph): void {
   const rows: [string, number][] = [
@@ -36,4 +36,51 @@ export function report(problems: Problem[]): number {
   );
 
   return errors.length === 0 ? 0 : 1;
+}
+
+export function printPlan(result: DiffResult): number {
+  const order: (keyof DiffResult)[] = [
+    'tracks',
+    'lessons',
+    'tokens',
+    'notes',
+    'patterns',
+    'sentences',
+    'dialogs',
+  ];
+
+  let total = 0;
+
+  for (const kind of order) {
+    const d = result[kind];
+    const n = d.create.length + d.update.length + d.remove.length;
+
+    if (n === 0) {
+      continue;
+    }
+
+    total += n;
+
+    console.log(pc.cyan(`\n${kind}`));
+
+    for (const id of d.create) {
+      console.log(`  ${pc.green('+ создать')} ${id}`);
+    }
+
+    for (const id of d.update) {
+      console.log(`  ${pc.yellow('~ обновить')} ${id}`);
+    }
+
+    for (const id of d.remove) {
+      console.log(`  ${pc.red('- удалить')} ${id}`);
+    }
+  }
+
+  // console.log(
+  //   total === 0
+  //     ? pc.green('\n✔ БД совпадает с content/ — применять нечего')
+  //     : pc.dim(`\nвсего изменений: ${total}`),
+  // );
+
+  return total;
 }
