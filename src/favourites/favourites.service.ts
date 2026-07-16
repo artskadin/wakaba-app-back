@@ -35,8 +35,6 @@ export class FavouritesService {
             cyrillicGuide: f.sentence.cyrillicGuide,
             tokens: f.sentence.tokens.map((st) => ({
               token: this.toToken(st.token),
-              slotType: st.slotType,
-              isFocuced: st.isFocusSlot,
             })),
           }
         : null,

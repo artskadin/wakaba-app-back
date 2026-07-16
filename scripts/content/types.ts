@@ -28,8 +28,6 @@ export interface TokenInput {
 
 export interface TokenRefInput {
   tokenId: string;
-  slotType?: string;
-  isFocusSlot?: boolean;
   before?: string;
   after?: string;
 }
@@ -40,7 +38,7 @@ export interface SentenceInput {
   translation: LocalizedText;
   romaji: string;
   cyrillicGuide: LocalizedText;
-  patternId?: string;
+  patterns?: { patternId: string; focusTokenIndex: number }[];
   grammarNoteIds?: string[];
 }
 

@@ -136,6 +136,7 @@ export class ContentService {
       include: {
         tokens: { orderBy: { position: 'asc' } },
         grammarNotes: { orderBy: { position: 'asc' } },
+        patterns: true,
       },
     });
   }
@@ -165,8 +166,8 @@ export class ContentService {
     }
 
     for (const sentence of sentences) {
-      if (sentence.patternId) {
-        patternIds.add(sentence.patternId);
+      for (const p of sentence.patterns) {
+        patternIds.add(p.patternId);
       }
     }
 
@@ -215,7 +216,7 @@ export class ContentService {
 }
 
 type SentenceWithRelations = Prisma.SentenceGetPayload<{
-  include: { tokens: true; grammarNotes: true };
+  include: { tokens: true; grammarNotes: true; patterns: true };
 }>;
 type PatternWithNotes = Prisma.PatternGetPayload<{
   include: { grammarNotes: true };
@@ -262,15 +263,22 @@ function toBundleSentence(sentence: SentenceWithRelations) {
     id: sentence.id,
     tokens: sentence.tokens.map((st) => ({
       tokenId: st.tokenId,
-      ...(st.slotType ? { slotType: st.slotType } : {}),
-      ...(st.isFocusSlot ? { isFocusSlot: st.isFocusSlot } : {}),
       ...(st.before ? { before: st.before } : {}),
       ...(st.after ? { after: st.after } : {}),
     })),
     translation: sentence.translation,
     romaji: sentence.romaji,
     cyrillicGuide: sentence.cyrillicGuide,
-    ...(sentence.patternId ? { patternId: sentence.patternId } : {}),
+    ...(sentence.patterns.length
+      ? {
+          patterns: [...sentence.patterns]
+            .sort((a, b) => a.patternId.localeCompare(b.patternId))
+            .map((p) => ({
+              patternId: p.patternId,
+              focusTokenIndex: p.focusTokenIndex,
+            })),
+        }
+      : {}),
     ...(sentence.grammarNotes.length
       ? {
           grammarNoteIds: sentence.grammarNotes.map(

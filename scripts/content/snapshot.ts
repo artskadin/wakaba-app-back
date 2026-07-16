@@ -53,8 +53,6 @@ export function snapshot(graph: ContentGraph): Snapshot {
 
 const normTokenRef = (r: TokenRefInput) => ({
   tokenId: r.tokenId,
-  ...(r.slotType ? { slotType: r.slotType } : {}),
-  ...(r.isFocusSlot ? { isFocusSlot: r.isFocusSlot } : {}),
   ...(r.before ? { before: r.before } : {}),
   ...(r.after ? { after: r.after } : {}),
 });
@@ -115,7 +113,13 @@ const normSentence = (s: SentenceInput) => ({
   translation: s.translation,
   romaji: s.romaji,
   cyrillicGuide: s.cyrillicGuide,
-  ...(s.patternId ? { patternId: s.patternId } : {}),
+  ...(s.patterns?.length
+    ? {
+        patterns: [...s.patterns].sort((a, b) =>
+          a.patternId.localeCompare(b.patternId),
+        ),
+      }
+    : {}),
   ...(s.grammarNoteIds?.length ? { grammarNoteIds: s.grammarNoteIds } : {}),
 });
 

@@ -54,7 +54,15 @@ export function validate(graph: ContentGraph): Problem[] {
       need(ref.tokenId, graph.tokens, `предложение "${s.id}"`, 'токен');
     }
 
-    need(s.patternId, graph.patterns, `предложение "${s.id}"`, 'паттерн');
+    for (const p of s.patterns ?? []) {
+      need(p.patternId, graph.patterns, `предложение "${s.id}"`, 'паттерн');
+      if (p.focusTokenIndex < 0 || p.focusTokenIndex >= s.tokens.length) {
+        problems.push({
+          level: 'error',
+          message: `предложение "${s.id}": focusTokenIndex ${p.focusTokenIndex} вне диапазона (0..${s.tokens.length - 1})`,
+        });
+      }
+    }
 
     for (const nid of s.grammarNoteIds ?? []) {
       need(nid, graph.notes, `предложение "${s.id}"`, 'заметка');
@@ -86,6 +94,26 @@ export function validate(graph: ContentGraph): Problem[] {
 
       if (step.kind === 'teach') {
         need(step.patternId, graph.patterns, where, 'паттерн');
+
+        if (step.patternId) {
+          const members = new Set([
+            step.sentenceId,
+            ...(step.siblingSentenceIds ?? []),
+          ]);
+
+          for (const sid of members) {
+            const sent = graph.sentences.get(sid);
+            if (
+              sent &&
+              !(sent.patterns ?? []).some((p) => p.patternId === step.patternId)
+            ) {
+              problems.push({
+                level: 'error',
+                message: `${where}: фраза "${sid}" не размечена паттерном "${step.patternId}"`,
+              });
+            }
+          }
+        }
 
         for (const sid of step.siblingSentenceIds ?? []) {
           need(sid, graph.sentences, where, 'предложение');
@@ -164,6 +192,22 @@ export function validate(graph: ContentGraph): Problem[] {
         }
       });
     });
+  }
+
+  const patternUse = new Map<string, number>();
+  for (const s of graph.sentences.values()) {
+    for (const p of s.patterns ?? []) {
+      patternUse.set(p.patternId, (patternUse.get(p.patternId) ?? 0) + 1);
+    }
+  }
+
+  for (const pid of graph.patterns.keys()) {
+    if ((patternUse.get(pid) ?? 0) < 2) {
+      problems.push({
+        level: 'warning',
+        message: `паттерн "${pid}": меньше 2 фраз-членов (рамка без наполнителей)`,
+      });
+    }
   }
 
   return problems;

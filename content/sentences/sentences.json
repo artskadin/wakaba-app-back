@@ -22,15 +22,9 @@
         "slotType": "language",
         "isFocusSlot": true
       },
-      {
-        "tokenId": "wa"
-      },
-      {
-        "tokenId": "hanasemasu"
-      },
-      {
-        "tokenId": "ka"
-      }
+      { "tokenId": "wa" },
+      { "tokenId": "hanasemasu" },
+      { "tokenId": "ka" }
     ],
     "translation": {
       "ru": "Вы говорите по-английски?"
@@ -39,7 +33,7 @@
     "cyrillicGuide": {
       "ru": "эйго ва ханасэмас ка"
     },
-    "patternId": "speak-language"
+    "patterns": [{ "patternId": "speak-language", "focusTokenIndex": 0 }]
   },
   "ask-speak-russian": {
     "id": "ask-speak-russian",
@@ -49,15 +43,9 @@
         "slotType": "language",
         "isFocusSlot": true
       },
-      {
-        "tokenId": "wa"
-      },
-      {
-        "tokenId": "hanasemasu"
-      },
-      {
-        "tokenId": "ka"
-      }
+      { "tokenId": "wa" },
+      { "tokenId": "hanasemasu" },
+      { "tokenId": "ka" }
     ],
     "translation": {
       "ru": "Вы говорите по-русски?"
@@ -66,7 +54,7 @@
     "cyrillicGuide": {
       "ru": "росиаго ва ханасэмас ка"
     },
-    "patternId": "speak-language"
+    "patterns": [{ "patternId": "speak-language", "focusTokenIndex": 0 }]
   },
   "ask-speak-chinese": {
     "id": "ask-speak-chinese",
@@ -76,15 +64,9 @@
         "slotType": "language",
         "isFocusSlot": true
       },
-      {
-        "tokenId": "wa"
-      },
-      {
-        "tokenId": "hanasemasu"
-      },
-      {
-        "tokenId": "ka"
-      }
+      { "tokenId": "wa" },
+      { "tokenId": "hanasemasu" },
+      { "tokenId": "ka" }
     ],
     "translation": {
       "ru": "Вы говорите по-китайски?"
@@ -93,20 +75,14 @@
     "cyrillicGuide": {
       "ru": "тю:гокуго ва ханасэмас ка"
     },
-    "patternId": "speak-language"
+    "patterns": [{ "patternId": "speak-language", "focusTokenIndex": 0 }]
   },
   "cannot-speak-japanese": {
     "id": "cannot-speak-japanese",
     "tokens": [
-      {
-        "tokenId": "nihongo"
-      },
-      {
-        "tokenId": "wa"
-      },
-      {
-        "tokenId": "hanasemasen"
-      }
+      { "tokenId": "nihongo" },
+      { "tokenId": "wa" },
+      { "tokenId": "hanasemasen" }
     ],
     "translation": {
       "ru": "Я не говорю по-японски."
@@ -123,21 +99,11 @@
   "speak-little-japanese": {
     "id": "speak-little-japanese",
     "tokens": [
-      {
-        "tokenId": "nihongo"
-      },
-      {
-        "tokenId": "wa"
-      },
-      {
-        "tokenId": "sukoshi"
-      },
-      {
-        "tokenId": "dake"
-      },
-      {
-        "tokenId": "hanasemasu"
-      }
+      { "tokenId": "nihongo" },
+      { "tokenId": "wa" },
+      { "tokenId": "sukoshi" },
+      { "tokenId": "dake" },
+      { "tokenId": "hanasemasu" }
     ],
     "translation": {
       "ru": "По-японски говорю только чуть-чуть."
@@ -153,9 +119,7 @@
   "staff-welcome": {
     "id": "staff-welcome",
     "tokens": [
-      {
-        "tokenId": "irasshaimase"
-      }
+      { "tokenId": "irasshaimase" }
     ],
     "translation": {
       "ru": "Добро пожаловать."
@@ -168,17 +132,9 @@
   "staff-yes-little": {
     "id": "staff-yes-little",
     "tokens": [
-      {
-        "tokenId": "hai",
-        "after": "、"
-      },
-      {
-        "tokenId": "sukoshi"
-      },
-      {
-        "tokenId": "dake",
-        "after": "。"
-      }
+      { "tokenId": "hai", "after": "、" },
+      { "tokenId": "sukoshi" },
+      { "tokenId": "dake", "after": "。" }
     ],
     "translation": {
       "ru": "Да, немного."
@@ -215,7 +171,7 @@
     "translation": { "ru": "Где туалет?" },
     "romaji": "Toire wa doko desu ka?",
     "cyrillicGuide": { "ru": "тоирэ ва доко дэс ка" },
-    "patternId": "ask-where"
+    "patterns": [{ "patternId": "ask-where", "focusTokenIndex": 0 }]
   },
   "where-station": {
     "id": "where-station",
@@ -226,7 +182,7 @@
     "translation": { "ru": "Где станция?" },
     "romaji": "Eki wa doko desu ka?",
     "cyrillicGuide": { "ru": "эки ва доко дэс ка" },
-    "patternId": "ask-where"
+    "patterns": [{ "patternId": "ask-where", "focusTokenIndex": 0 }]
   },
   "where-konbini": {
     "id": "where-konbini",
@@ -237,7 +193,7 @@
     "translation": { "ru": "Где комбини?" },
     "romaji": "Konbini wa doko desu ka?",
     "cyrillicGuide": { "ru": "комбини ва доко дэс ка" },
-    "patternId": "ask-where"
+    "patterns": [{ "patternId": "ask-where", "focusTokenIndex": 0 }]
   },
   "where-exchange": {
     "id": "where-exchange",
@@ -248,7 +204,7 @@
     "translation": { "ru": "Где обменник валют?" },
     "romaji": "Ryōgaejo wa doko desu ka?",
     "cyrillicGuide": { "ru": "рё:гаэдзё ва доко дэс ка" },
-    "patternId": "ask-where"
+    "patterns": [{ "patternId": "ask-where", "focusTokenIndex": 0 }]
   },
   "thanks-polite": {
     "id": "thanks-polite",

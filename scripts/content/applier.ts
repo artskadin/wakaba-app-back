@@ -157,7 +157,6 @@ export class Applier {
       translation: json(s.translation),
       romaji: s.romaji,
       cyrillicGuide: json(s.cyrillicGuide),
-      patternId: s.patternId ?? null,
     };
 
     await this.tx.sentence.upsert({
@@ -172,12 +171,21 @@ export class Applier {
         sentenceId: s.id,
         tokenId: ref.tokenId,
         position,
-        slotType: ref.slotType ?? null,
-        isFocusSlot: ref.isFocusSlot ?? false,
         before: ref.before ?? null,
         after: ref.after ?? null,
       })),
     });
+
+    await this.tx.sentencePattern.deleteMany({ where: { sentenceId: s.id } });
+    if (s.patterns?.length) {
+      await this.tx.sentencePattern.createMany({
+        data: s.patterns.map((p) => ({
+          sentenceId: s.id,
+          patternId: p.patternId,
+          focusTokenIndex: p.focusTokenIndex,
+        })),
+      });
+    }
 
     await this.tx.sentenceGrammarNote.deleteMany({
       where: { sentenceId: s.id },

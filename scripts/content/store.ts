@@ -21,7 +21,7 @@ import {
 
 type PatternRow = Prisma.PatternGetPayload<{ include: { grammarNotes: true } }>;
 type SentenceRow = Prisma.SentenceGetPayload<{
-  include: { tokens: true; grammarNotes: true };
+  include: { tokens: true; grammarNotes: true; patterns: true };
 }>;
 type DialogRow = Prisma.DialogGetPayload<{ include: { turns: true } }>;
 type LessonRow = Prisma.LessonGetPayload<{
@@ -43,6 +43,7 @@ export async function readDbAsGraph(
         include: {
           tokens: { orderBy: { position: 'asc' } },
           grammarNotes: { orderBy: { position: 'asc' } },
+          patterns: true,
         },
       }),
       prisma.dialog.findMany({
@@ -104,15 +105,22 @@ export async function readDbAsGraph(
         id: s.id,
         tokens: s.tokens.map((st) => ({
           tokenId: st.tokenId,
-          ...(st.slotType ? { slotType: st.slotType } : {}),
-          ...(st.isFocusSlot ? { isFocusSlot: st.isFocusSlot } : {}),
           ...(st.before ? { before: st.before } : {}),
           ...(st.after ? { after: st.after } : {}),
         })),
         translation: asJson<LocalizedText>(s.translation),
         romaji: s.romaji,
         cyrillicGuide: asJson<LocalizedText>(s.cyrillicGuide),
-        ...(s.patternId ? { patternId: s.patternId } : {}),
+        ...(s.patterns.length
+          ? {
+              patterns: [...s.patterns]
+                .sort((a, b) => a.patternId.localeCompare(b.patternId))
+                .map((p) => ({
+                  patternId: p.patternId,
+                  focusTokenIndex: p.focusTokenIndex,
+                })),
+            }
+          : {}),
         ...(s.grammarNotes.length
           ? { grammarNoteIds: s.grammarNotes.map((l) => l.grammarNoteId) }
           : {}),
