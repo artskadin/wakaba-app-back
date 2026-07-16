@@ -1,0 +1,34 @@
+{
+  "id": "dont-understand",
+  "trackId": "communication",
+  "title": { "ru": "Ничего не понял, но очень интересно" },
+  "context": { "ru": "Не поняли собеседника? Просим повторить помедленнее" },
+  "version": 1,
+  "position": 2,
+  "changelog": [
+    { "version": 1, "date": "2026-07-16", "summary": { "ru": "Создана" }, "notify": false }
+  ],
+  "steps": [
+    { "kind": "teach", "sentenceId": "where-shinkansen" },
+    { "kind": "assemble", "sentenceId": "where-shinkansen" },
+    { "kind": "speak", "sentenceId": "where-shinkansen" },
+    { "kind": "teach", "sentenceId": "i-dont-understand" },
+    { "kind": "assemble", "sentenceId": "i-dont-understand" },
+    { "kind": "speak", "sentenceId": "i-dont-understand" },
+    {
+      "kind": "teach",
+      "sentenceId": "once-more-please",
+      "patternId": "ask-favor",
+      "siblingSentenceIds": ["once-more-please", "slowly-please"]
+    },
+    { "kind": "teach", "sentenceId": "slowly-please" },
+    { "kind": "assemble", "sentenceId": "once-more-please" },
+    { "kind": "speak", "sentenceId": "once-more-please" },
+    { "kind": "assemble", "sentenceId": "slowly-please" },
+    { "kind": "speak", "sentenceId": "slowly-please" },
+    { "kind": "teach", "sentenceId": "understood" },
+    { "kind": "speak", "sentenceId": "understood" },
+    { "kind": "teach", "sentenceId": "thanks-polite" },
+    { "kind": "dialog", "dialogId": "lost-in-station" }
+  ]
+}
