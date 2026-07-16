@@ -46,5 +46,44 @@
     },
     "type": "noun",
     "grammarNoteId": "go"
+  },
+  "toire": {
+    "id": "toire",
+    "surface": "トイレ",
+    "reading": "といれ",
+    "romaji": "toire",
+    "cyrillic": "тоирэ",
+    "gloss": { "ru": "туалет" },
+    "type": "noun",
+    "grammarNoteId": "toire-note"
+  },
+  "eki": {
+    "id": "eki",
+    "surface": "駅",
+    "reading": "えき",
+    "romaji": "eki",
+    "cyrillic": "эки",
+    "gloss": { "ru": "станция" },
+    "type": "noun",
+    "grammarNoteId": "eki-note"
+  },
+  "konbini": {
+    "id": "konbini",
+    "surface": "コンビニ",
+    "reading": "こんびに",
+    "romaji": "konbini",
+    "cyrillic": "комбини",
+    "gloss": { "ru": "комбини (минимаркет)" },
+    "type": "noun",
+    "grammarNoteId": "konbini-note"
+  },
+  "ryougaejo": {
+    "id": "ryougaejo",
+    "surface": "両替所",
+    "reading": "りょうがえじょ",
+    "romaji": "ryōgaejo",
+    "cyrillic": "рё:гаэдзё",
+    "gloss": { "ru": "обменник валют" },
+    "type": "noun"
   }
 }

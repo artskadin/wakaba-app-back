@@ -34,5 +34,15 @@
     },
     "type": "particle",
     "grammarNoteId": "dake-note"
+  },
+  "yo": {
+    "id": "yo",
+    "surface": "よ",
+    "reading": "よ",
+    "romaji": "yo",
+    "cyrillic": "ё",
+    "gloss": { "ru": "(частица уверения)" },
+    "type": "particle",
+    "grammarNoteId": "yo-note"
   }
 }

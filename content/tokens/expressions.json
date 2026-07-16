@@ -32,5 +32,35 @@
       "ru": "да"
     },
     "type": "expression"
+  },
+  "sumimasen": {
+    "id": "sumimasen",
+    "surface": "すみません",
+    "reading": "すみません",
+    "romaji": "sumimasen",
+    "cyrillic": "сумимасэн",
+    "gloss": { "ru": "извините" },
+    "type": "expression",
+    "grammarNoteId": "sumimasen-note"
+  },
+  "arigatou-gozaimasu": {
+    "id": "arigatou-gozaimasu",
+    "surface": "ありがとうございます",
+    "reading": "ありがとうございます",
+    "romaji": "arigatō gozaimasu",
+    "cyrillic": "аригато: годзаимас",
+    "gloss": { "ru": "спасибо (вежливо)" },
+    "type": "expression",
+    "grammarNoteId": "arigatou-gozaimasu-note"
+  },
+  "ieie": {
+    "id": "ieie",
+    "surface": "いえいえ",
+    "reading": "いえいえ",
+    "romaji": "ie ie",
+    "cyrillic": "иэиэ",
+    "gloss": { "ru": "да не за что" },
+    "type": "expression",
+    "grammarNoteId": "ieie-note"
   }
 }

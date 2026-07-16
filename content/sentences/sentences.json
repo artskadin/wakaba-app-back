@@ -187,5 +187,98 @@
     "cyrillicGuide": {
       "ru": "хай, сукоси дакэ"
     }
+  },
+  "excuse-me": {
+    "id": "excuse-me",
+    "tokens": [{ "tokenId": "sumimasen" }],
+    "translation": { "ru": "Извините." },
+    "romaji": "Sumimasen.",
+    "cyrillicGuide": { "ru": "сумимасэн" }
+  },
+  "ask-a-moment": {
+    "id": "ask-a-moment",
+    "tokens": [
+      { "tokenId": "sumimasen", "after": "、" },
+      { "tokenId": "chotto" }, { "tokenId": "ii" }, { "tokenId": "desu" }, { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Извините, можно вас на минутку?" },
+    "romaji": "Sumimasen, chotto ii desu ka?",
+    "cyrillicGuide": { "ru": "сумимасэн, тётто ии дэс ка" },
+    "grammarNoteIds": ["ask-a-moment-note"]
+  },
+  "where-toilet": {
+    "id": "where-toilet",
+    "tokens": [
+      { "tokenId": "toire", "slotType": "place", "isFocusSlot": true },
+      { "tokenId": "wa" }, { "tokenId": "doko" }, { "tokenId": "desu" }, { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Где туалет?" },
+    "romaji": "Toire wa doko desu ka?",
+    "cyrillicGuide": { "ru": "тоирэ ва доко дэс ка" },
+    "patternId": "ask-where"
+  },
+  "where-station": {
+    "id": "where-station",
+    "tokens": [
+      { "tokenId": "eki", "slotType": "place", "isFocusSlot": true },
+      { "tokenId": "wa" }, { "tokenId": "doko" }, { "tokenId": "desu" }, { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Где станция?" },
+    "romaji": "Eki wa doko desu ka?",
+    "cyrillicGuide": { "ru": "эки ва доко дэс ка" },
+    "patternId": "ask-where"
+  },
+  "where-konbini": {
+    "id": "where-konbini",
+    "tokens": [
+      { "tokenId": "konbini", "slotType": "place", "isFocusSlot": true },
+      { "tokenId": "wa" }, { "tokenId": "doko" }, { "tokenId": "desu" }, { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Где комбини?" },
+    "romaji": "Konbini wa doko desu ka?",
+    "cyrillicGuide": { "ru": "комбини ва доко дэс ка" },
+    "patternId": "ask-where"
+  },
+  "where-exchange": {
+    "id": "where-exchange",
+    "tokens": [
+      { "tokenId": "ryougaejo", "slotType": "place", "isFocusSlot": true },
+      { "tokenId": "wa" }, { "tokenId": "doko" }, { "tokenId": "desu" }, { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Где обменник валют?" },
+    "romaji": "Ryōgaejo wa doko desu ka?",
+    "cyrillicGuide": { "ru": "рё:гаэдзё ва доко дэс ка" },
+    "patternId": "ask-where"
+  },
+  "thanks-polite": {
+    "id": "thanks-polite",
+    "tokens": [{ "tokenId": "arigatou-gozaimasu" }],
+    "translation": { "ru": "Спасибо!" },
+    "romaji": "Arigatō gozaimasu.",
+    "cyrillicGuide": { "ru": "аригато: годзаимас" }
+  },
+  "staff-yes-sure": {
+    "id": "staff-yes-sure",
+    "tokens": [
+      { "tokenId": "hai", "after": "、" },
+      { "tokenId": "ii" }, { "tokenId": "desu" }, { "tokenId": "yo" }
+    ],
+    "translation": { "ru": "Да, конечно." },
+    "romaji": "Hai, ii desu yo.",
+    "cyrillicGuide": { "ru": "хай, ии дэс ё" }
+  },
+  "staff-over-there": {
+    "id": "staff-over-there",
+    "tokens": [{ "tokenId": "asoko" }, { "tokenId": "desu" }],
+    "translation": { "ru": "Вон там." },
+    "romaji": "Asoko desu.",
+    "cyrillicGuide": { "ru": "асоко дэс" }
+  },
+  "staff-not-at-all": {
+    "id": "staff-not-at-all",
+    "tokens": [{ "tokenId": "ieie" }],
+    "translation": { "ru": "Да не за что." },
+    "romaji": "Ie ie.",
+    "cyrillicGuide": { "ru": "иэиэ" }
   }
 }

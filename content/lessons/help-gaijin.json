@@ -1,0 +1,28 @@
+{
+  "id": "help-gaijin",
+  "trackId": "communication",
+  "title": { "ru": "Помогите гайдзину" },
+  "context": { "ru": "Останавливаем прохожего, спрашиваем дорогу и благодарим" },
+  "version": 1,
+  "position": 1,
+  "changelog": [
+    { "version": 1, "date": "2026-07-14", "summary": { "ru": "Создана" }, "notify": false }
+  ],
+  "steps": [
+    { "kind": "teach", "sentenceId": "excuse-me" },
+    { "kind": "teach", "sentenceId": "ask-a-moment" },
+    {
+      "kind": "teach",
+      "sentenceId": "where-toilet",
+      "patternId": "ask-where",
+      "siblingSentenceIds": ["where-toilet", "where-station", "where-konbini", "where-exchange"]
+    },
+    { "kind": "teach", "sentenceId": "thanks-polite" },
+    { "kind": "assemble", "sentenceId": "ask-a-moment" },
+    { "kind": "speak", "sentenceId": "ask-a-moment" },
+    { "kind": "assemble", "sentenceId": "where-toilet" },
+    { "kind": "speak", "sentenceId": "where-toilet" },
+    { "kind": "assemble", "sentenceId": "where-station" },
+    { "kind": "dialog", "dialogId": "ask-direction" }
+  ]
+}

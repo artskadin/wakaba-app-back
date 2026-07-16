@@ -98,5 +98,73 @@ export function validate(graph: ContentGraph): Problem[] {
     });
   }
 
+  for (const note of graph.notes.values()) {
+    const blocks = [...note.body, ...(note.deeper ?? [])];
+
+    blocks.forEach((block, bi) => {
+      (block.examples ?? []).forEach((ex, ei) => {
+        const e = ex as {
+          kind?: string;
+          wrong?: unknown;
+          right?: unknown;
+          a?: { segments?: { romaji?: string; cyrillic?: string }[] };
+          b?: { segments?: { romaji?: string; cyrillic?: string }[] };
+        };
+        const where = `заметка "${note.id}", блок ${bi + 1}, пример ${ei + 1}`;
+
+        if (e.kind === 'wrong-right') {
+          if (!e.wrong && !e.right) {
+            problems.push({
+              level: 'error',
+              message: `${where}: wrong-right без сторон`,
+            });
+          } else if (e.right && !e.wrong) {
+            problems.push({
+              level: 'error',
+              message: `${where}: right без wrong — используй phrase`,
+            });
+          } else if (e.wrong && !e.right) {
+            problems.push({
+              level: 'warning',
+              message: `${where}: wrong без right (допустимо, но редко)`,
+            });
+          }
+
+          return;
+        }
+
+        if (e.kind === 'contrast') {
+          for (const [key, side] of [
+            ['a', e.a],
+            ['b', e.b],
+          ] as const) {
+            const segments = side?.segments ?? [];
+
+            if (segments.length === 0) {
+              problems.push({
+                level: 'error',
+                message: `${where}: contrast.${key} без сегментов`,
+              });
+              continue;
+            }
+
+            segments.forEach((s, si) => {
+              (['romaji', 'cyrillic'] as const).forEach((field) => {
+                const v = s[field];
+
+                if (typeof v === 'string' && v !== v.trim()) {
+                  problems.push({
+                    level: 'warning',
+                    message: `${where}: contrast.${key} сегмент ${si + 1} — пробелы по краям ${field}`,
+                  });
+                }
+              });
+            });
+          }
+        }
+      });
+    });
+  }
+
   return problems;
 }

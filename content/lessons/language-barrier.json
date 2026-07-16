@@ -8,6 +8,7 @@
     "ru": "Первая фраза: здороваемся и выясняем, на каком языке продолжить разговор"
   },
   "version": 1,
+  "position": 0,
   "changelog": [
     {
       "version": 1,
@@ -19,10 +20,7 @@
     }
   ],
   "steps": [
-    {
-      "kind": "teach",
-      "sentenceId": "greeting-konnichiwa"
-    },
+    { "kind": "teach", "sentenceId": "greeting-konnichiwa" },
     {
       "kind": "teach",
       "sentenceId": "ask-speak-english",
@@ -33,41 +31,14 @@
         "ask-speak-chinese"
       ]
     },
-    {
-      "kind": "teach",
-      "sentenceId": "cannot-speak-japanese"
-    },
-    {
-      "kind": "teach",
-      "sentenceId": "speak-little-japanese"
-    },
-    {
-      "kind": "assemble",
-      "sentenceId": "ask-speak-english"
-    },
-    {
-      "kind": "speak",
-      "sentenceId": "ask-speak-english"
-    },
-    {
-      "kind": "assemble",
-      "sentenceId": "cannot-speak-japanese"
-    },
-    {
-      "kind": "speak",
-      "sentenceId": "cannot-speak-japanese"
-    },
-    {
-      "kind": "assemble",
-      "sentenceId": "speak-little-japanese"
-    },
-    {
-      "kind": "speak",
-      "sentenceId": "speak-little-japanese"
-    },
-    {
-      "kind": "dialog",
-      "dialogId": "language-help"
-    }
+    { "kind": "teach", "sentenceId": "cannot-speak-japanese" },
+    { "kind": "teach", "sentenceId": "speak-little-japanese" },
+    { "kind": "assemble", "sentenceId": "ask-speak-english" },
+    { "kind": "speak", "sentenceId": "ask-speak-english" },
+    { "kind": "assemble", "sentenceId": "cannot-speak-japanese" },
+    { "kind": "speak", "sentenceId": "cannot-speak-japanese" },
+    { "kind": "assemble", "sentenceId": "speak-little-japanese" },
+    { "kind": "speak", "sentenceId": "speak-little-japanese" },
+    { "kind": "dialog", "dialogId": "language-help" }
   ]
 }

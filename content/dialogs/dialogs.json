@@ -22,5 +22,17 @@
         "sentenceId": "staff-yes-little"
       }
     ]
+  },
+  "ask-direction": {
+    "id": "ask-direction",
+    "title": { "ru": "Остановите прохожего и узнайте, где станция" },
+    "turns": [
+      { "speaker": "user", "sentenceId": "ask-a-moment" },
+      { "speaker": "staff", "sentenceId": "staff-yes-sure" },
+      { "speaker": "user", "sentenceId": "where-station" },
+      { "speaker": "staff", "sentenceId": "staff-over-there" },
+      { "speaker": "user", "sentenceId": "thanks-polite" },
+      { "speaker": "staff", "sentenceId": "staff-not-at-all" }
+    ]
   }
 }

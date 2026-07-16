@@ -6,7 +6,13 @@
     },
     "slotType": "language",
     "grammarNoteIds": [
-      "ask-language"
+      "ask-language-note"
     ]
+  },
+  "ask-where": {
+    "id": "ask-where",
+    "explanation": { "ru": "[место] + wa + doko + desu + ka. Меняешь только место." },
+    "slotType": "place",
+    "grammarNoteIds": ["where-question-note"]
   }
 }

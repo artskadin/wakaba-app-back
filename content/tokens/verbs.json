@@ -22,5 +22,15 @@
     },
     "type": "verb",
     "grammarNoteId": "potential"
+  },
+  "desu": {
+    "id": "desu",
+    "surface": "です",
+    "reading": "です",
+    "romaji": "desu",
+    "cyrillic": "дэс",
+    "gloss": { "ru": "(вежливая связка)" },
+    "type": "verb",
+    "grammarNoteId": "desu-note"
   }
 }

@@ -10,5 +10,15 @@
     },
     "type": "adverb",
     "grammarNoteId": "sukoshi-note"
+  },
+  "chotto": {
+    "id": "chotto",
+    "surface": "ちょっと",
+    "reading": "ちょっと",
+    "romaji": "chotto",
+    "cyrillic": "тётто",
+    "gloss": { "ru": "чуть-чуть / немного / на минутку" },
+    "type": "adverb",
+    "grammarNoteId": "chotto-note"
   }
 }

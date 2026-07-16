@@ -1,0 +1,22 @@
+{
+  "doko": {
+    "id": "doko",
+    "surface": "どこ",
+    "reading": "どこ",
+    "romaji": "doko",
+    "cyrillic": "доко",
+    "gloss": { "ru": "где" },
+    "type": "pronoun",
+    "grammarNoteId": "kosoado-place"
+  },
+  "asoko": {
+    "id": "asoko",
+    "surface": "あそこ",
+    "reading": "あそこ",
+    "romaji": "asoko",
+    "cyrillic": "асоко",
+    "gloss": { "ru": "вон там" },
+    "type": "pronoun",
+    "grammarNoteId": "kosoado-place"
+  }
+}
