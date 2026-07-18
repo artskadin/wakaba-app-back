@@ -21,7 +21,6 @@
       "patternId": "ask-favor",
       "siblingSentenceIds": ["once-more-please", "slowly-please"]
     },
-    { "kind": "teach", "sentenceId": "slowly-please" },
     { "kind": "assemble", "sentenceId": "once-more-please" },
     { "kind": "speak", "sentenceId": "once-more-please" },
     { "kind": "assemble", "sentenceId": "slowly-please" },

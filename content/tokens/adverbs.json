@@ -20,5 +20,25 @@
     "gloss": { "ru": "чуть-чуть / немного / на минутку" },
     "type": "adverb",
     "grammarNoteId": "chotto-note"
+  },
+  "yukkuri": {
+    "id": "yukkuri",
+    "surface": "ゆっくり",
+    "reading": "ゆっくり",
+    "romaji": "yukkuri",
+    "cyrillic": "юккури",
+    "gloss": { "ru": "медленно / не спеша" },
+    "type": "adverb",
+    "grammarNoteId": "yukkuri-note"
+  },
+  "massugu": {
+    "id": "massugu",
+    "surface": "まっすぐ",
+    "reading": "まっすぐ",
+    "romaji": "massugu",
+    "cyrillic": "массугу",
+    "gloss": { "ru": "прямо" },
+    "type": "adverb",
+    "grammarNoteId": "directions"
   }
 }

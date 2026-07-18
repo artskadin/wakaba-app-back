@@ -34,5 +34,20 @@
       { "speaker": "user", "sentenceId": "thanks-polite" },
       { "speaker": "staff", "sentenceId": "staff-not-at-all" }
     ]
+  },
+  "lost-in-station": {
+    "id": "lost-in-station",
+    "title": { "ru": "Найдите синкансэн на огромном вокзале" },
+    "turns": [
+      { "speaker": "user", "sentenceId": "where-shinkansen" },
+      { "speaker": "staff", "sentenceId": "staff-directions-blur" },
+      { "speaker": "user", "sentenceId": "i-dont-understand" },
+      { "speaker": "staff", "sentenceId": "staff-sorry" },
+      { "speaker": "user", "sentenceId": "slowly-please" },
+      { "speaker": "staff", "sentenceId": "staff-slow-directions" },
+      { "speaker": "user", "sentenceId": "understood" },
+      { "speaker": "user", "sentenceId": "thanks-polite" },
+      { "speaker": "staff", "sentenceId": "staff-not-at-all" }
+    ]
   }
 }

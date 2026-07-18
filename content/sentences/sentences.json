@@ -236,5 +236,89 @@
     "translation": { "ru": "Да не за что." },
     "romaji": "Ie ie.",
     "cyrillicGuide": { "ru": "иэиэ" }
+  },
+  "where-shinkansen": {
+    "id": "where-shinkansen",
+    "tokens": [
+      { "tokenId": "sumimasen", "after": "、" },
+      { "tokenId": "shinkansen", "slotType": "place", "isFocusSlot": true },
+      { "tokenId": "wa" }, { "tokenId": "doko" }, { "tokenId": "desu" }, { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Извините, где синкансэн?" },
+    "romaji": "Sumimasen, shinkansen wa doko desu ka?",
+    "cyrillicGuide": { "ru": "сумимасэн, синкансэн ва доко дэс ка" },
+    "patterns": [{ "patternId": "ask-where", "focusTokenIndex": 1 }],
+    "grammarNoteIds": ["where-shinkansen-note"]
+  },
+  "i-dont-understand": {
+    "id": "i-dont-understand",
+    "tokens": [
+      { "tokenId": "sumimasen", "after": "、" },
+      { "tokenId": "wakarimasen" }
+    ],
+    "translation": { "ru": "Извините, я не понимаю." },
+    "romaji": "Sumimasen, wakarimasen.",
+    "cyrillicGuide": { "ru": "сумимасэн, вакаримасэн" },
+    "grammarNoteIds": ["i-dont-understand-note", "omit-pronoun"]
+  },
+  "once-more-please": {
+    "id": "once-more-please",
+    "tokens": [
+      { "tokenId": "mou-ichido" },
+      { "tokenId": "onegaishimasu" }
+    ],
+    "translation": { "ru": "Ещё раз, пожалуйста." },
+    "romaji": "Mō ichido onegaishimasu.",
+    "cyrillicGuide": { "ru": "мо: итидо онэгаисимас" },
+    "patterns": [{ "patternId": "ask-favor", "focusTokenIndex": 0 }]
+  },
+  "slowly-please": {
+    "id": "slowly-please",
+    "tokens": [
+      { "tokenId": "yukkuri", "slotType": "favor", "isFocusSlot": true },
+      { "tokenId": "onegaishimasu" }
+    ],
+    "translation": { "ru": "Помедленнее, пожалуйста." },
+    "romaji": "Yukkuri onegaishimasu.",
+    "cyrillicGuide": { "ru": "юккури онэгаисимас" },
+    "patterns": [{ "patternId": "ask-favor", "focusTokenIndex": 0 }]
+  },
+  "understood": {
+    "id": "understood",
+    "tokens": [{ "tokenId": "wakarimashita", "after": "！" }],
+    "translation": { "ru": "Понял!" },
+    "romaji": "Wakarimashita!",
+    "cyrillicGuide": { "ru": "вакаримасита!" },
+    "grammarNoteIds": []
+  },
+  "staff-directions-blur": {
+    "id": "staff-directions-blur",
+    "tokens": [
+      { "tokenId": "eeto", "after": "、" },
+      { "tokenId": "massugu" }, { "tokenId": "desu", "after": "、" },
+      { "tokenId": "sorekara" }, { "tokenId": "migi" }, { "tokenId": "desu", "after": "、" },
+      { "tokenId": "sorekara" }, { "tokenId": "hidari" }, { "tokenId": "desu", "after": "…" }
+    ],
+    "translation": { "ru": "Э-э, прямо, потом направо, потом налево…" },
+    "romaji": "Ēto, massugu desu, sorekara migi desu, sorekara hidari desu…",
+    "cyrillicGuide": { "ru": "э:то, массугу дэс, сорэкара миги дэс, сорэкара хидари дэс…" },
+    "grammarNoteIds": ["staff-directions-blur-note"]
+  },
+  "staff-sorry": {
+    "id": "staff-sorry",
+    "tokens": [{ "tokenId": "gomen-nasai", "before": "あ、", "after": "！" }],
+    "translation": { "ru": "Ой, извините!" },
+    "romaji": "A, gomen nasai!",
+    "cyrillicGuide": { "ru": "а, гомэн насай!" }
+  },
+  "staff-slow-directions": {
+    "id": "staff-slow-directions",
+    "tokens": [
+      { "tokenId": "asoko" }, { "tokenId": "desu", "after": "。" },
+      { "tokenId": "massugu" }, { "tokenId": "desu", "after": "。" }
+    ],
+    "translation": { "ru": "Вон там. Прямо." },
+    "romaji": "Asoko desu. Massugu desu.",
+    "cyrillicGuide": { "ru": "асоко дэс. массугу дэс." }
   }
 }

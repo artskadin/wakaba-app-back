@@ -14,5 +14,11 @@
     "explanation": { "ru": "[место] + wa + doko + desu + ka. Меняешь только место." },
     "slotType": "place",
     "grammarNoteIds": ["where-question-note"]
+  },
+  "ask-favor": {
+    "id": "ask-favor",
+    "explanation": { "ru": "[просьба] + onegaishimasu. Меняешь только просьбу." },
+    "slotType": "favor",
+    "grammarNoteIds": ["ask-favor-note"]
   }
 }

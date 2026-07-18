@@ -32,5 +32,25 @@
     "gloss": { "ru": "(вежливая связка)" },
     "type": "verb",
     "grammarNoteId": "desu-note"
+  },
+  "wakarimasen": {
+    "id": "wakarimasen",
+    "surface": "分かりません",
+    "reading": "わかりません",
+    "romaji": "wakarimasen",
+    "cyrillic": "вакаримасэн",
+    "gloss": { "ru": "не понимаю" },
+    "type": "verb",
+    "grammarNoteId": "wakaru-family"
+  },
+  "wakarimashita": {
+    "id": "wakarimashita",
+    "surface": "分かりました",
+    "reading": "わかりました",
+    "romaji": "wakarimashita",
+    "cyrillic": "вакаримасита",
+    "gloss": { "ru": "понял / понятно" },
+    "type": "verb",
+    "grammarNoteId": "wakaru-family"
   }
 }

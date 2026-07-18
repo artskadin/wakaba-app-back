@@ -44,8 +44,8 @@ export function reachable(
       tokens.add(ref.tokenId);
     }
 
-    if (s.patternId) {
-      patterns.add(s.patternId);
+    for (const p of s.patterns ?? []) {
+      patterns.add(p.patternId);
     }
 
     for (const nid of s.grammarNoteIds ?? []) {
@@ -285,7 +285,7 @@ export function findReferences(graph: ContentGraph, id: string): Reference[] {
       add('sentence', sid, 'tokens');
     }
 
-    if (s.patternId === id) {
+    if ((s.patterns ?? []).some((p) => p.patternId === id)) {
       add('sentence', sid, 'patternId');
     }
 

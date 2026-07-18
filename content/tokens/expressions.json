@@ -62,5 +62,55 @@
     "gloss": { "ru": "да не за что" },
     "type": "expression",
     "grammarNoteId": "ieie-note"
+  },
+  "mou-ichido": {
+    "id": "mou-ichido",
+    "surface": "もう一度",
+    "reading": "もういちど",
+    "romaji": "mō ichido",
+    "cyrillic": "мо: итидо",
+    "gloss": { "ru": "ещё раз" },
+    "type": "expression",
+    "grammarNoteId": "mou-ichido-note"
+  },
+  "onegaishimasu": {
+    "id": "onegaishimasu",
+    "surface": "お願いします",
+    "reading": "おねがいします",
+    "romaji": "onegaishimasu",
+    "cyrillic": "онэгаисимас",
+    "gloss": { "ru": "пожалуйста / прошу" },
+    "type": "expression",
+    "grammarNoteId": "onegaishimasu-note"
+  },
+  "gomen-nasai": {
+    "id": "gomen-nasai",
+    "surface": "ごめんなさい",
+    "reading": "ごめんなさい",
+    "romaji": "gomen nasai",
+    "cyrillic": "гомэн насай",
+    "gloss": { "ru": "прости(те)" },
+    "type": "expression",
+    "grammarNoteId": "gomen-nasai-note"
+  },
+  "eeto": {
+    "id": "eeto",
+    "surface": "えーと",
+    "reading": "ええと",
+    "romaji": "ēto",
+    "cyrillic": "э:то",
+    "gloss": { "ru": "э-э… / ну…" },
+    "type": "expression",
+    "grammarNoteId": "eeto-note"
+  },
+  "sorekara": {
+    "id": "sorekara",
+    "surface": "それから",
+    "reading": "それから",
+    "romaji": "sorekara",
+    "cyrillic": "сорэкара",
+    "gloss": { "ru": "затем / потом / а ещё" },
+    "type": "other",
+    "grammarNoteId": "sorekara-note"
   }
 }

@@ -85,5 +85,35 @@
     "cyrillic": "рё:гаэдзё",
     "gloss": { "ru": "обменник валют" },
     "type": "noun"
+  },
+  "shinkansen": {
+    "id": "shinkansen",
+    "surface": "新幹線",
+    "reading": "しんかんせん",
+    "romaji": "shinkansen",
+    "cyrillic": "синкансэн",
+    "gloss": { "ru": "синкансэн (скоростной поезд)" },
+    "type": "noun",
+    "grammarNoteId": "shinkansen-note"
+  },
+  "migi": {
+    "id": "migi",
+    "surface": "右",
+    "reading": "みぎ",
+    "romaji": "migi",
+    "cyrillic": "миги",
+    "gloss": { "ru": "право / направо" },
+    "type": "noun",
+    "grammarNoteId": "directions"
+  },
+  "hidari": {
+    "id": "hidari",
+    "surface": "左",
+    "reading": "ひだり",
+    "romaji": "hidari",
+    "cyrillic": "хидари",
+    "gloss": { "ru": "лево / налево" },
+    "type": "noun",
+    "grammarNoteId": "directions"
   }
 }
