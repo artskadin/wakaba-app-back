@@ -1,7 +1,7 @@
 -- команда для выполнения
--- docker compose exec -T db psql -U wakaba -d wakaba < tools/mcp/setup-agent-ro.sql
+-- docker compose exec -T db psql -U wakaba -d wakaba -v agent_password="$AGENT_RO_PASSWORD" < tools/mcp/setup-agent-ro.sql
 
-CREATE ROLE agent_ro LOGIN PASSWORD 'ig#j98mnFSl1rklnk!#f93MZ';
+CREATE ROLE agent_ro LOGIN PASSWORD 'agent_password';
 
 GRANT CONNECT ON DATABASE wakaba TO agent_ro;
 
