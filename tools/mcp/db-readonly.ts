@@ -31,6 +31,7 @@ import type {
   StepKind,
   Speaker,
 } from '@prisma/client';
+import { ruText, validateSelectQuery } from './db-readonly.lib';
 
 const DSN = process.env.WAKABA_RO_URL;
 if (!DSN) {
@@ -846,7 +847,7 @@ server.registerTool(
     },
   },
   async ({ sql }) => {
-    const s = sql.trim().replace(/;\s*$/, '');
+    const s = validateSelectQuery(sql);
 
     if (s.includes(';')) {
       throw new Error('Только один statement за вызов');
@@ -899,19 +900,6 @@ server.registerTool(
     return ok(text);
   },
 );
-
-function ruText(v: unknown): string {
-  if (v == null) {
-    return '-';
-  }
-  if (typeof v === 'string') {
-    return v;
-  }
-
-  const o = v as Record<string, unknown>;
-
-  return String(o.ru ?? o.en ?? JSON.stringify(v));
-}
 
 main().catch((e) => {
   console.error(e);
