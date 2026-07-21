@@ -64,6 +64,11 @@ export async function runApply(
     await prisma.$transaction((tx) => new Applier(tx).run(graph, plan, mode));
 
     console.log(pc.green('\n✔ Применено.'));
+    console.log(
+      pc.dim(
+        'Тексты могли измениться — обнови индекс: npm run content -- embed',
+      ),
+    );
 
     return 0;
   } finally {

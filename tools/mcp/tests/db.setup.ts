@@ -19,13 +19,22 @@ export async function provisionTestDb(): Promise<TestDb> {
 
   if (!adminDsn) {
     const { PostgreSqlContainer } = await import('@testcontainers/postgresql');
-    const container = await new PostgreSqlContainer('postgres:16').start();
+    const container = await new PostgreSqlContainer(
+      'pgvector/pgvector:pg16',
+    ).start();
 
     adminDsn = container.getConnectionUri();
 
     stopContainer = async () => {
       await container.stop();
     };
+  }
+
+  {
+    const ext = new pg.Client({ connectionString: adminDsn });
+    await ext.connect();
+    await ext.query('CREATE EXTENSION IF NOT EXISTS vector');
+    await ext.end();
   }
 
   if (!process.env.WAKABA_TEST_SKIP_PUSH) {
@@ -77,6 +86,12 @@ export async function provisionTestDb(): Promise<TestDb> {
   } finally {
     await admin.end();
   }
+
+  execSync('npx tsx scripts/content/index.ts embed', {
+    cwd: REPO_ROOT,
+    env: { ...process.env, DATABASE_URL_DEV: adminDsn, WAKABA_ENCODER: 'fake' },
+    stdio: 'pipe',
+  });
 
   const u = new URL(adminDsn);
   u.username = AGENT_ROLE;

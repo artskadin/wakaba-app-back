@@ -9,6 +9,7 @@ import { runBundle } from './commands/bundle';
 import { runWhere } from './commands/where';
 import { runDiff } from './commands/diff';
 import { runApply } from './commands/apply';
+import { runEmbed } from './commands/embed';
 import { parseEnv } from './db';
 
 async function main(): Promise<void> {
@@ -56,6 +57,9 @@ async function main(): Promise<void> {
       break;
     case 'apply':
       process.exit(await runApply(values, parseEnv(values.env)));
+      break;
+    case 'embed':
+      process.exit(await runEmbed(parseEnv(values.env)));
       break;
     default:
       console.error(pc.red(`Неизвестная команда: ${command}`));

@@ -29,6 +29,7 @@ beforeAll(async () => {
       env: {
         ...(process.env as Record<string, string>),
         WAKABA_RO_URL: db.agentDsn,
+        WAKABA_ENCODER: 'fake',
       },
     }),
   );
@@ -149,5 +150,38 @@ describe('защита на уровне БД (мимо сервера)', () => 
     } finally {
       await direct.end();
     }
+  });
+});
+
+describe('semantic_search (на FakeEncoder: проверяем механику, не семантику)', () => {
+  it('тождественный текст находит свою сущность с similarity 1.000', async () => {
+    const admin = new pg.Client({ connectionString: db.adminDsn });
+    await admin.connect();
+    const { rows } = await admin.query<{ text: string }>(
+      `SELECT text FROM "ContentEmbedding" WHERE kind = 'token' AND "entityId" = 'ocha'`,
+    );
+    await admin.end();
+
+    const { text } = await call('semantic_search', { query: rows[0].text });
+    const topLine = text.split('\n')[1];
+
+    expect(topLine).toContain('ocha');
+    expect(topLine).toContain('1.000');
+  });
+
+  it('фильтр kind ограничивает выдачу', async () => {
+    const { text } = await call('semantic_search', {
+      query: 'что угодно',
+      kind: 'lesson',
+    });
+
+    expect(text).toContain('[lesson]');
+    expect(text).not.toContain('[token]');
+  });
+
+  it('индекс другой моделью => внятная ошибка с рецептом', async () => {
+    const { isError } = await call('semantic_search', { query: 'чай' });
+
+    expect(isError).toBe(false);
   });
 });

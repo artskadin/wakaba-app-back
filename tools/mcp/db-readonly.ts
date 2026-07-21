@@ -32,6 +32,7 @@ import type {
   Speaker,
 } from '@prisma/client';
 import { ruText, validateSelectQuery } from './db-readonly.lib';
+import { createEncoder } from './encoder';
 
 const DSN = process.env.WAKABA_RO_URL;
 if (!DSN) {
@@ -901,6 +902,70 @@ server.registerTool(
   },
 );
 
+server.registerTool(
+  'semantic_search',
+  {
+    title: 'Semantic (meaning) Search',
+    description:
+      'Search content by MEANING, not substring: finds synonyms and paraphrases ' +
+      '("быстро" finds "стремительно"; russian query finds japanese content). ' +
+      'Use for "is there anything about X" checks before creating content, and for finding ' +
+      'near-duplicates. Returns entity ids for the `where` tool. ' +
+      'For exact/known strings prefer search_content. Requires the embedding index (npm run embed).',
+    inputSchema: {
+      query: z
+        .string()
+        .min(1)
+        .describe(
+          'Meaning to search: a phrase, topic, or concept, in russian or japanese',
+        ),
+      kind: z
+        .enum(['token', 'sentence', 'note', 'pattern', 'lesson'])
+        .optional(),
+      limit: z.number().int().min(1).max(30).optional().describe('Default 8'),
+    },
+  },
+  async ({ query, kind, limit }) => {
+    const encoder = createEncoder();
+
+    const models = await queryRows<{ model: string }>(
+      `SELECT DISTINCT model FROM "ContentEmbedding"`,
+    );
+    if (models.length === 0) {
+      return ok(
+        'Индекс эмбеддингов пуст — попроси пользователя выполнить npm run embed.',
+      );
+    }
+
+    if (!models.some((m) => m.model === encoder.model)) {
+      throw new Error(
+        `Индекс построен моделью ${models[0].model}, а сервер использует ${encoder.model}. ` +
+          `Нужен npm run embed.`,
+      );
+    }
+
+    const [vec] = await encoder.encode([query]);
+    const rows = await queryRows<SemanticRow>(
+      `SELECT kind, "entityId", text, round((1 - (embedding <=> $1::vector))::numeric, 3) AS sim
+        FROM "ContentEmbedding"
+        WHERE model = $2 AND ($3::text IS NULL OR kind = $3)
+        ORDER BY embedding <=> $1::vector
+        LIMIT $4
+      `,
+      [`[${vec.join(',')}]`, encoder.model, kind ?? null, limit ?? 8],
+    );
+
+    const lines = rows.map(
+      (r) => `  ${r.sim} [${r.kind}] ${r.entityId} – ${r.text}`,
+    );
+
+    return ok(
+      `Ближайшие по смыслу к «${query}»:\n${lines.join('\n')}\n` +
+        `Детали любой сущности — инструментом where(id).`,
+    );
+  },
+);
+
 main().catch((e) => {
   console.error(e);
   process.exit(1);
@@ -992,4 +1057,10 @@ type StatsRow = {
   patterns: number;
   dialogs: number;
   syn_groups: number;
+};
+type SemanticRow = {
+  kind: string;
+  entityId: string;
+  text: string;
+  sim: string;
 };

@@ -24,7 +24,7 @@ export function printHelp(): void {
                         --env dev|prod   какую БД смотреть (по умолчанию dev)
                         --dry-run   показать план и выйти
                         -y, --yes   без вопроса (для CI): применить всё
-
+    embed            Генерация векторных эмбеддингов для контента (Token | Sentence | GrammarNote | Pattern | Lesson)
 
   ${pc.cyan('ОБЩИЕ')}
     --help, -h       Показать эту справку.
