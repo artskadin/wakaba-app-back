@@ -328,3 +328,15 @@ model Favourite {
   @@unique([userId, tokenId])
   @@unique([userId, sentenceId])
 }
+
+model ContentEmbedding {
+  kind      String // 'token' | 'sentence' | 'note' | 'pattern' | 'lesson'
+  entityId  String
+  model     String
+  textHash  String
+  text      String
+  embedding Unsupported("vector(2560)")
+  updatedAt DateTime                    @updatedAt
+
+  @@id([kind, entityId])
+}
