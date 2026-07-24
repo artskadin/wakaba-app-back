@@ -52,5 +52,15 @@
     "gloss": { "ru": "понял / понятно" },
     "type": "verb",
     "grammarNoteId": "wakaru-family"
+  },
+  "kimashita": {
+    "id": "kimashita",
+    "surface": "来ました",
+    "reading": "きました",
+    "romaji": "kimashita",
+    "cyrillic": "кимасита",
+    "gloss": { "ru": "приехал / пришёл" },
+    "type": "verb",
+    "grammarNoteId": "kimashita-note"
   }
 }

@@ -18,5 +18,15 @@
     "gloss": { "ru": "вон там" },
     "type": "pronoun",
     "grammarNoteId": "kosoado-place"
+  },
+  "watashi": {
+    "id": "watashi",
+    "surface": "私",
+    "reading": "わたし",
+    "romaji": "watashi",
+    "cyrillic": "ватаси",
+    "gloss": { "ru": "я" },
+    "type": "pronoun",
+    "grammarNoteId": "watashi-note"
   }
 }

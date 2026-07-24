@@ -320,5 +320,150 @@
     "translation": { "ru": "Вон там. Прямо." },
     "romaji": "Asoko desu. Massugu desu.",
     "cyrillicGuide": { "ru": "асоко дэс. массугу дэс." }
+  },
+  "i-am-eren": {
+    "id": "i-am-eren",
+    "tokens": [
+      { "tokenId": "watashi" },
+      { "tokenId": "wa" },
+      { "tokenId": "eren-yeegaa", "slotType": "name", "isFocusSlot": true },
+      { "tokenId": "desu" }
+    ],
+    "translation": { "ru": "Меня зовут Эрен Йегер." },
+    "romaji": "Watashi wa Eren Yēgā desu.",
+    "cyrillicGuide": { "ru": "ватаси ва эрэн йе:га: дэс" },
+    "patterns": [{ "patternId": "introduce-name", "focusTokenIndex": 2 }]
+  },
+  "ask-your-name": {
+    "id": "ask-your-name",
+    "tokens": [
+      { "tokenId": "onamae" },
+      { "tokenId": "wa", "after": "？" }
+    ],
+    "translation": { "ru": "Как вас зовут?" },
+    "romaji": "O-namae wa?",
+    "cyrillicGuide": { "ru": "о-намаэ ва?" },
+    "grammarNoteIds": ["ask-your-name-note"]
+  },
+  "ask-where-from": {
+    "id": "ask-where-from",
+    "tokens": [
+      { "tokenId": "doko" },
+      { "tokenId": "kara" },
+      { "tokenId": "kimashita" },
+      { "tokenId": "ka" }
+    ],
+    "translation": { "ru": "Откуда вы приехали?" },
+    "romaji": "Doko kara kimashita ka?",
+    "cyrillicGuide": { "ru": "доко кара кимасита ка" },
+    "grammarNoteIds": ["ask-where-from-note"]
+  },
+  "from-russia": {
+    "id": "from-russia",
+    "tokens": [
+      { "tokenId": "roshia", "slotType": "country", "isFocusSlot": true },
+      { "tokenId": "kara" },
+      { "tokenId": "kimashita" }
+    ],
+    "translation": { "ru": "Я приехал из России." },
+    "romaji": "Roshia kara kimashita.",
+    "cyrillicGuide": { "ru": "росиа кара кимасита" },
+    "patterns": [{ "patternId": "from-country", "focusTokenIndex": 0 }],
+    "grammarNoteIds": ["omit-pronoun"]
+  },
+  "from-belarus": {
+    "id": "from-belarus",
+    "tokens": [
+      { "tokenId": "beraruushi", "slotType": "country", "isFocusSlot": true },
+      { "tokenId": "kara" },
+      { "tokenId": "kimashita" }
+    ],
+    "translation": { "ru": "Я приехал из Беларуси." },
+    "romaji": "Berarūshi kara kimashita.",
+    "cyrillicGuide": { "ru": "бэрару:си кара кимасита" },
+    "patterns": [{ "patternId": "from-country", "focusTokenIndex": 0 }]
+  },
+  "from-kazakhstan": {
+    "id": "from-kazakhstan",
+    "tokens": [
+      { "tokenId": "kazafusutan", "slotType": "country", "isFocusSlot": true },
+      { "tokenId": "kara" },
+      { "tokenId": "kimashita" }
+    ],
+    "translation": { "ru": "Я приехал из Казахстана." },
+    "romaji": "Kazafusutan kara kimashita.",
+    "cyrillicGuide": { "ru": "кадзафусутан кара кимасита" },
+    "patterns": [{ "patternId": "from-country", "focusTokenIndex": 0 }]
+  },
+  "from-kyrgyzstan": {
+    "id": "from-kyrgyzstan",
+    "tokens": [
+      { "tokenId": "kirugisu", "slotType": "country", "isFocusSlot": true },
+      { "tokenId": "kara" },
+      { "tokenId": "kimashita" }
+    ],
+    "translation": { "ru": "Я приехал из Кыргызстана." },
+    "romaji": "Kirugisu kara kimashita.",
+    "cyrillicGuide": { "ru": "киругису кара кимасита" },
+    "patterns": [{ "patternId": "from-country", "focusTokenIndex": 0 }]
+  },
+  "greeting-hajimemashite": {
+    "id": "greeting-hajimemashite",
+    "tokens": [{ "tokenId": "hajimemashite" }],
+    "translation": { "ru": "Приятно познакомиться." },
+    "romaji": "Hajimemashite.",
+    "cyrillicGuide": { "ru": "хадзимэмаситэ" },
+    "grammarNoteIds": ["hajimemashite-note"]
+  },
+  "pleased-to-meet": {
+    "id": "pleased-to-meet",
+    "tokens": [
+      { "tokenId": "yoroshiku" },
+      { "tokenId": "onegaishimasu" }
+    ],
+    "translation": { "ru": "Прошу любить и жаловать." },
+    "romaji": "Yoroshiku onegaishimasu.",
+    "cyrillicGuide": { "ru": "ёросику онэгаисимас" },
+    "grammarNoteIds": ["pleased-to-meet-note"]
+  },
+  "full-introduction": {
+    "id": "full-introduction",
+    "tokens": [
+      { "tokenId": "hajimemashite", "after": "！" },
+      { "tokenId": "yoroshiku" },
+      { "tokenId": "onegaishimasu" }
+    ],
+    "translation": { "ru": "Приятно познакомиться! Прошу любить и жаловать." },
+    "romaji": "Hajimemashite! Yoroshiku onegaishimasu.",
+    "cyrillicGuide": { "ru": "хадзимэмаситэ! ёросику онэгаисимас" }
+  },
+  "staff-introduce-levi": {
+    "id": "staff-introduce-levi",
+    "tokens": [
+      { "tokenId": "rivai-akkaaman" },
+      { "tokenId": "desu" }
+    ],
+    "translation": { "ru": "Я Леви Аккерман." },
+    "romaji": "Rivai Akkāman desu.",
+    "cyrillicGuide": { "ru": "ривай акка:ман дэс" }
+  },
+  "staff-likewise": {
+    "id": "staff-likewise",
+    "tokens": [{ "tokenId": "kochira-koso", "after": "。" }],
+    "translation": { "ru": "Взаимно." },
+    "romaji": "Kochira koso.",
+    "cyrillicGuide": { "ru": "котира косо" },
+    "grammarNoteIds": ["kochira-koso-note"]
+  },
+  "staff-surprised": {
+    "id": "staff-surprised",
+    "tokens": [
+      { "tokenId": "sou", "before": "え、" },
+      { "tokenId": "desu" },
+      { "tokenId": "ka", "after": "！" }
+    ],
+    "translation": { "ru": "О, вот как!" },
+    "romaji": "E, sō desu ka!",
+    "cyrillicGuide": { "ru": "э, со: дэс ка!" }
   }
 }

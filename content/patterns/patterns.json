@@ -20,5 +20,17 @@
     "explanation": { "ru": "[просьба] + onegaishimasu. Меняешь только просьбу." },
     "slotType": "favor",
     "grammarNoteIds": ["ask-favor-note"]
+  },
+  "introduce-name": {
+    "id": "introduce-name",
+    "explanation": { "ru": "watashi + wa + [имя] + desu. Меняешь только имя — подставь своё." },
+    "slotType": "name",
+    "grammarNoteIds": ["i-am-eren-note"]
+  },
+  "from-country": {
+    "id": "from-country",
+    "explanation": { "ru": "[страна] + kara + kimashita. Меняешь только страну." },
+    "slotType": "country",
+    "grammarNoteIds": ["from-russia-note"]
   }
 }

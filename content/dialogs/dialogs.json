@@ -49,5 +49,19 @@
       { "speaker": "user", "sentenceId": "thanks-polite" },
       { "speaker": "staff", "sentenceId": "staff-not-at-all" }
     ]
+  },
+  "first-meeting": {
+    "id": "first-meeting",
+    "title": { "ru": "Разговорились с соседом за стойкой — представьтесь" },
+    "turns": [
+      { "speaker": "staff", "sentenceId": "ask-your-name" },
+      { "speaker": "user", "sentenceId": "i-am-eren" },
+      { "speaker": "staff", "sentenceId": "staff-introduce-levi" },
+      { "speaker": "user", "sentenceId": "full-introduction" },
+      { "speaker": "staff", "sentenceId": "staff-likewise" },
+      { "speaker": "staff", "sentenceId": "ask-where-from" },
+      { "speaker": "user", "sentenceId": "from-russia" },
+      { "speaker": "staff", "sentenceId": "staff-surprised" }
+    ]
   }
 }

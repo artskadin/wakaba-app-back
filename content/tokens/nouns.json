@@ -115,5 +115,75 @@
     "gloss": { "ru": "лево / налево" },
     "type": "noun",
     "grammarNoteId": "directions"
+  },
+  "onamae": {
+    "id": "onamae",
+    "surface": "お名前",
+    "reading": "おなまえ",
+    "romaji": "o-namae",
+    "cyrillic": "о-намаэ",
+    "gloss": { "ru": "(ваше) имя" },
+    "type": "noun",
+    "grammarNoteId": "onamae-note"
+  },
+  "roshia": {
+    "id": "roshia",
+    "surface": "ロシア",
+    "reading": "ろしあ",
+    "romaji": "roshia",
+    "cyrillic": "росиа",
+    "gloss": { "ru": "Россия" },
+    "type": "noun",
+    "grammarNoteId": "katakana-countries"
+  },
+  "beraruushi": {
+    "id": "beraruushi",
+    "surface": "ベラルーシ",
+    "reading": "べらるーし",
+    "romaji": "berarūshi",
+    "cyrillic": "бэрару:си",
+    "gloss": { "ru": "Беларусь" },
+    "type": "noun",
+    "grammarNoteId": "katakana-countries"
+  },
+  "kazafusutan": {
+    "id": "kazafusutan",
+    "surface": "カザフスタン",
+    "reading": "かざふすたん",
+    "romaji": "kazafusutan",
+    "cyrillic": "кадзафусутан",
+    "gloss": { "ru": "Казахстан" },
+    "type": "noun",
+    "grammarNoteId": "katakana-countries"
+  },
+  "kirugisu": {
+    "id": "kirugisu",
+    "surface": "キルギス",
+    "reading": "きるぎす",
+    "romaji": "kirugisu",
+    "cyrillic": "киругису",
+    "gloss": { "ru": "Кыргызстан" },
+    "type": "noun",
+    "grammarNoteId": "katakana-countries"
+  },
+  "eren-yeegaa": {
+    "id": "eren-yeegaa",
+    "surface": "エレン・イェーガー",
+    "reading": "エレン・イェーガー",
+    "romaji": "Eren Yēgā",
+    "cyrillic": "эрэн йе:га:",
+    "gloss": { "ru": "Эрен Йегер (имя)" },
+    "type": "noun",
+    "grammarNoteId": "katakana-names"
+  },
+  "rivai-akkaaman": {
+    "id": "rivai-akkaaman",
+    "surface": "リヴァイ・アッカーマン",
+    "reading": "リヴァイ・アッカーマン",
+    "romaji": "Rivai Akkāman",
+    "cyrillic": "ривай акка:ман",
+    "gloss": { "ru": "Леви Аккерман (имя)" },
+    "type": "noun",
+    "grammarNoteId": "katakana-names"
   }
 }

@@ -40,5 +40,25 @@
     "gloss": { "ru": "прямо" },
     "type": "adverb",
     "grammarNoteId": "directions"
+  },
+  "yoroshiku": {
+    "id": "yoroshiku",
+    "surface": "よろしく",
+    "reading": "よろしく",
+    "romaji": "yoroshiku",
+    "cyrillic": "ёросику",
+    "gloss": { "ru": "по-доброму / благосклонно" },
+    "type": "adverb",
+    "grammarNoteId": "yoroshiku-note"
+  },
+  "sou": {
+    "id": "sou",
+    "surface": "そう",
+    "reading": "そう",
+    "romaji": "sō",
+    "cyrillic": "со:",
+    "gloss": { "ru": "так / именно так" },
+    "type": "adverb",
+    "grammarNoteId": "sou-note"
   }
 }

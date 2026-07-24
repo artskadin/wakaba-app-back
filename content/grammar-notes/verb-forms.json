@@ -466,5 +466,178 @@
         ]
       }
     ]
+  },
+  "kimashita-note": {
+    "id": "kimashita-note",
+    "title": { "ru": "kimashita — «пришёл / приехал (сюда)»" },
+    "body": [
+      {
+        "summary": { "ru": "kimashita — «пришёл / приехал / прибыл» в вежливой форме прошедшего времени. Главное в его смысле — направление: kimashita всегда означает движение СЮДА, к месту, где находится говорящий." }
+      },
+      {
+        "summary": { "ru": "Хвост -mashita — метка прошедшего времени в вежливой речи. Любой вежливый глагол на -mashita — о том, что уже случилось." },
+        "details": [
+          { "ru": "wakarimashita (вакаримасита) — «понял»." }
+        ],
+        "examples": [
+          {
+            "kind": "contrast",
+            "a": {
+              "segments": [
+                { "surface": "来", "romaji": "ki", "cyrillic": "ки" },
+                { "surface": "ました", "romaji": "mashita", "cyrillic": "масита", "isHighlight": true }
+              ],
+              "translation": { "ru": "приехал" }
+            },
+            "b": {
+              "segments": [
+                { "surface": "分かり", "romaji": "wakari", "cyrillic": "вакари" },
+                { "surface": "ました", "romaji": "mashita", "cyrillic": "масита", "isHighlight": true }
+              ],
+              "translation": { "ru": "понял" }
+            },
+            "note": { "ru": "разные глаголы — один подсвеченный хвост: -mashita и есть метка прошедшего. «Понял» — буквально «до меня дошло»" }
+          }
+        ]
+      },
+      {
+        "summary": { "ru": "Направление зашито в сам глагол: kimashita — движение сюда, ikimashita — движение туда. Русское «поехал» не различает, японский — всегда." },
+        "details": [
+          { "ru": "ni (ни) — частица направления «в»." },
+          { "ru": "ikimashita (икимасита) — «пошёл / поехал (туда)» в вежливой форме прошедшего времени." },
+          { "ru": "nihon (нихон) — «Япония»." },
+          { "ru": "kara (кара) — «из»." }
+        ],
+        "examples": [
+          {
+            "kind": "contrast",
+            "a": {
+              "segments": [
+                { "surface": "日本から", "romaji": "nihon kara", "cyrillic": "нихон кара" },
+                { "surface": "来ました", "romaji": "kimashita", "cyrillic": "кимасита", "isHighlight": true }
+              ],
+              "translation": { "ru": "«Я приехал из Японии.» (говорящий — здесь, движение было сюда)" }
+            },
+            "b": {
+              "segments": [
+                { "surface": "日本に", "romaji": "nihon ni", "cyrillic": "нихон ни" },
+                { "surface": "行きました", "romaji": "ikimashita", "cyrillic": "икимасита", "isHighlight": true }
+              ],
+              "translation": { "ru": "«Я съездил в Японию.» (движение было туда)" }
+            },
+            "note": { "ru": "выбор глагола рисует карту: kimashita — стрелка к говорящему, ikimashita — от него" }
+          }
+        ]
+      },
+      {
+        "summary": { "ru": "Важно, что kimashita означает «прибыл сюда» в общем смысле, а способ передвижения может быть любой:" },
+        "details": [
+          { "ru": "пришёл пешком" },
+          { "ru": "приехал на поезде" },
+          { "ru": "прилетел" }
+        ]
+      }
+    ],
+    "deeper": [
+      {
+        "summary": { "ru": "Настоящее-будущее время — kimasu (кимас): «приду / приеду / еду». Японский не делит настоящее и будущее — одна форма закрывает оба, время достраивается из контекста." },
+        "examples": [
+          {
+            "kind": "transform",
+            "from": { "surface": "来ます", "romaji": "kimasu", "cyrillic": "кимас", "translation": { "ru": "«иду / приду / еду / приеду» (сюда)" } },
+            "to": { "surface": "来ました", "romaji": "kimashita", "cyrillic": "кимасита", "translation": { "ru": "«пришёл / приехал» (сюда)" } },
+            "note": { "ru": "-masu → -mashita: так вежливый глагол уходит в прошлое" }
+          }
+        ]
+      },
+      {
+        "summary": { "ru": "Откуда взялось kimashita: в словаре живёт форма kuru (куру) — «приходить». Это исходник: от него отрезается хвост, остаётся основа ki-, и к ней цепляются вежливые окончания. Kuru — один из всего двух неправильных глаголов японского (второй — suru, «делать»), поэтому его основа причудливо меняется; у остальных глаголов языка всё по правилам." },
+        "examples": [
+          {
+            "kind": "transform",
+            "from": { "surface": "来る", "romaji": "kuru", "cyrillic": "куру", "translation": { "ru": "«приходить» (словарная форма)" } },
+            "to": { "surface": "来ました", "romaji": "kimashita", "cyrillic": "кимасита", "translation": { "ru": "«пришёл» (вежливая форма, прошедшее)" } },
+            "note": { "ru": "kuru → основа ki- → ki + mashita." }
+          }
+        ]
+      },
+      {
+        "summary": { "ru": "Из основы ki- собираются четыре главные вежливые формы. Переключателей всего два:" },
+        "details": [
+          { "ru": "Время (настоящее/будущее ↔ прошлое)." },
+          { "ru": "Утверждение ↔ отрицание." }
+        ]
+      },
+      {
+        "summary": { "ru": "Вот все четыре комбинации:" },
+        "details": [
+          { "ru": "ki + masu = kimasu (кимас) — «приду»: настоящее/будущее, утверждение." }
+        ],
+        "examples": [
+          {
+            "kind": "transform",
+            "from": { "surface": "来", "romaji": "ki-", "cyrillic": "ки-", "translation": { "ru": "основа «приходить»" } },
+            "to": { "surface": "来ます", "romaji": "kimasu", "cyrillic": "кимас", "translation": { "ru": "приду" } },
+            "note": { "ru": "хвост -masu: вежливое настоящее/будущее" }
+          }
+        ]
+      },
+      {
+        "details": [
+          { "ru": "ki + masen = kimasen (кимасэн) — «не приду»: настоящее/будущее, отрицание." }
+        ],
+        "examples": [
+          {
+            "kind": "transform",
+            "from": { "surface": "来", "romaji": "ki-", "cyrillic": "ки-", "translation": { "ru": "основа «приходить»" } },
+            "to": { "surface": "来ません", "romaji": "kimasen", "cyrillic": "кимасэн", "translation": { "ru": "не приду" } },
+            "note": { "ru": "хвост -masen: вежливое отрицание" }
+          }
+        ]
+      },
+      {
+        "details": [
+          { "ru": "ki + mashita = kimashita (кимасита) — «пришёл»: прошлое, утверждение." }
+        ],
+        "examples": [
+          {
+            "kind": "transform",
+            "from": { "surface": "来", "romaji": "ki-", "cyrillic": "ки-", "translation": { "ru": "основа «приходить»" } },
+            "to": { "surface": "来ました", "romaji": "kimashita", "cyrillic": "кимасита", "translation": { "ru": "пришёл" } },
+            "note": { "ru": "хвост -mashita: утверждение уходит в прошлое заменой хвоста" }
+          }
+        ]
+      },
+      {
+        "details": [
+          { "ru": "ki + masen deshita = kimasen deshita (кимасэн дэсита) — «не пришёл»: прошлое, отрицание. Deshita — прошедшее от связки desu: отрицание уводится в прошлое ей, потому что у хвоста -masen собственной прошедшей формы нет." }
+        ],
+        "examples": [
+          {
+            "kind": "transform",
+            "from": { "surface": "来ません", "romaji": "kimasen", "cyrillic": "кимасэн", "translation": { "ru": "не приду" } },
+            "to": { "surface": "来ませんでした", "romaji": "kimasen deshita", "cyrillic": "кимасэн дэсита", "translation": { "ru": "не пришёл" } },
+            "note": { "ru": "единственная форма, где хвост не меняется, а наращивается: отрицание + подпорка deshita" }
+          }
+        ]
+      },
+      {
+        "summary": { "ru": "Эта четвёрка окончаний одна на все вежливые глаголы японского: меняется только основа перед ними." },
+        "details": [
+          { "ru": "tomodachi (томодати) — «друг»." },
+          { "ru": "wa (ва) — частица темы." }
+        ],
+        "examples": [
+          {
+            "kind": "phrase",
+            "forms": [
+              { "surface": "友達は来ます", "romaji": "tomodachi wa kimasu", "cyrillic": "томодати ва кимас", "translation": { "ru": "Друг придёт." } },
+              { "surface": "友達は来ませんでした", "romaji": "tomodachi wa kimasen deshita", "cyrillic": "томодати ва кимасэн дэсита", "translation": { "ru": "Друг не пришёл." } }
+            ],
+            "note": { "ru": "крайние точки четвёрки в живых фразах: основа ki- стоит на месте, работу делают окончания" }
+          }
+        ]
+      }
+    ]
   }
 }

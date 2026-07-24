@@ -44,5 +44,15 @@
     "gloss": { "ru": "(частица уверения)" },
     "type": "particle",
     "grammarNoteId": "yo-note"
+  },
+  "kara": {
+    "id": "kara",
+    "surface": "から",
+    "reading": "から",
+    "romaji": "kara",
+    "cyrillic": "кара",
+    "gloss": { "ru": "из / от / с / потому что / так как / поэтому" },
+    "type": "particle",
+    "grammarNoteId": "kara-note"
   }
 }

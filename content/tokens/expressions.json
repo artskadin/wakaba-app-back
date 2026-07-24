@@ -112,5 +112,25 @@
     "gloss": { "ru": "затем / потом / а ещё" },
     "type": "other",
     "grammarNoteId": "sorekara-note"
+  },
+  "hajimemashite": {
+    "id": "hajimemashite",
+    "surface": "はじめまして",
+    "reading": "はじめまして",
+    "romaji": "hajimemashite",
+    "cyrillic": "хадзимэмаситэ",
+    "gloss": { "ru": "приятно познакомиться" },
+    "type": "expression",
+    "grammarNoteId": "hajimemashite-note"
+  },
+  "kochira-koso": {
+    "id": "kochira-koso",
+    "surface": "こちらこそ",
+    "reading": "こちらこそ",
+    "romaji": "kochira koso",
+    "cyrillic": "котира косо",
+    "gloss": { "ru": "взаимно / и я вас" },
+    "type": "expression",
+    "grammarNoteId": "kochira-koso-note"
   }
 }

@@ -1,0 +1,36 @@
+{
+  "id": "introduce-yourself",
+  "trackId": "communication",
+  "title": { "ru": "Разрешите представиться" },
+  "context": { "ru": "Знакомимся: называем имя, говорим, откуда приехали, и осваиваем ритуальные фразы первой встречи" },
+  "version": 1,
+  "position": 3,
+  "changelog": [
+    { "version": 1, "date": "2026-07-22", "summary": { "ru": "Создана" }, "notify": false }
+  ],
+  "steps": [
+    { "kind": "teach", "sentenceId": "i-am-eren", "patternId": "introduce-name" },
+    { "kind": "teach", "sentenceId": "ask-your-name" },
+    { "kind": "assemble", "sentenceId": "i-am-eren" },
+    { "kind": "speak", "sentenceId": "i-am-eren" },
+    { "kind": "assemble", "sentenceId": "ask-your-name" },
+    { "kind": "speak", "sentenceId": "ask-your-name" },
+    { "kind": "teach", "sentenceId": "ask-where-from" },
+    {
+      "kind": "teach",
+      "sentenceId": "from-russia",
+      "patternId": "from-country",
+      "siblingSentenceIds": ["from-russia", "from-belarus", "from-kazakhstan", "from-kyrgyzstan"]
+    },
+    { "kind": "assemble", "sentenceId": "ask-where-from" },
+    { "kind": "speak", "sentenceId": "ask-where-from" },
+    { "kind": "assemble", "sentenceId": "from-russia" },
+    { "kind": "speak", "sentenceId": "from-russia" },
+    { "kind": "teach", "sentenceId": "greeting-hajimemashite" },
+    { "kind": "teach", "sentenceId": "pleased-to-meet" },
+    { "kind": "speak", "sentenceId": "greeting-hajimemashite" },
+    { "kind": "assemble", "sentenceId": "pleased-to-meet" },
+    { "kind": "speak", "sentenceId": "pleased-to-meet" },
+    { "kind": "dialog", "dialogId": "first-meeting" }
+  ]
+}
